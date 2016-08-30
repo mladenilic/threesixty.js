@@ -30,6 +30,23 @@ var ThreeSixty = (function (window) {
 		container.style.backgroundImage = 'url("' + options.image + '")';
 		container.style.backgroundPosition = '0 0';
 
+		if (options.draggable) {
+			container.addEventListener('mousedown', function (e) {
+			    dragOrigin = e.pageX;
+			});
+
+			container.addEventListener('mouseup', function () {
+			    dragOrigin = false;
+			});
+
+			document.addEventListener('mousemove', function (e) {
+			    if (dragOrigin && Math.abs(dragOrigin - e.pageX) > options.dragTolerance) {
+			        dragOrigin > e.pageX ? self.prev() : self.next();
+			        dragOrigin = e.pageX;
+			    }
+			});
+		}
+
 		if (options.prev) {
 			options.prev.addEventListener('mousedown', function (e) {
 				e.preventDefault();
