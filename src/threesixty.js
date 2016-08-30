@@ -22,6 +22,7 @@ var ThreeSixty = (function (window) {
 		options.speed = options.speed || 100;
 		options.dragTolerance = options.dragTolerance || 10;
 		options.draggable = options.draggable || true;
+		options.keys = options.keys || true;
 		options.prev = options.prev || false;
 		options.next = options.next || false;
 
@@ -44,6 +45,20 @@ var ThreeSixty = (function (window) {
 			        dragOrigin > e.pageX ? self.prev() : self.next();
 			        dragOrigin = e.pageX;
 			    }
+			});
+		}
+
+		if (options.keys) {
+			document.addEventListener('keydown', function (e) {
+				if ([37, 39].includes(e.keyCode)) {
+					threesixty.play(37 === e.keyCode);
+				}
+			});
+
+			document.addEventListener('keyup', function (e) {
+				if ([37, 39].includes(e.keyCode)) {
+					threesixty.stop();
+				}
 			});
 		}
 
