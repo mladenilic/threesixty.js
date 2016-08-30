@@ -1,9 +1,13 @@
 <html>
 	<head>
-		<title>ThreeSixty view</title>
+		<title>ThreeSixty.js</title>
+		<link rel="stylesheet" href="css/styles.css">
 	</head>
 	<body>
+		<h1>ThreeSixty.js</h1>
 		<div id="threesixty"></div>
+		<a href="#" id="prev"><img src="images/prev.png" alt="prev"/></a>
+		<a href="#" id="next"><img src="images/next.png" alt="next"/></a>
 
 		<script src="src/threesixty.js"></script>
 		<script>
@@ -13,6 +17,41 @@
 				height: 380,
 				count: 19,
 				perRow: 4
+			});
+
+			var prev = document.getElementById('prev');
+			var next = document.getElementById('next');
+
+			prev.addEventListener('mousedown', function (e) {
+				e.preventDefault();
+				threesixty.play(true);
+			});
+
+			prev.addEventListener('mouseup', function (e) {
+				e.preventDefault();
+				threesixty.stop();
+			});
+
+			next.addEventListener('mousedown', function (e) {
+				e.preventDefault();
+				threesixty.play();
+			});
+
+			next.addEventListener('mouseup', function (e) {
+				e.preventDefault();
+				threesixty.stop();
+			});
+
+			document.addEventListener('keydown', function (e) {
+				if ([37, 39].includes(e.keyCode)) {
+					threesixty.play(37 === e.keyCode);
+				}
+			});
+
+			document.addEventListener('keyup', function (e) {
+				if ([37, 39].includes(e.keyCode)) {
+					threesixty.stop();
+				}
 			});
 		</script>
 	</body>

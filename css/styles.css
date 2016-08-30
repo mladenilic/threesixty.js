@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+	font-family: 'Open Sans', sans;
+	text-align: center;
+}
+
+#threesixty {
+	margin: auto;
+}
+
+#prev,
+#next {
+	padding: 0 30px;
+}

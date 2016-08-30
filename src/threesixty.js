@@ -9,7 +9,9 @@ var ThreeSixty = (function (window) {
 		var loop = function (reversed = false) {
 			reversed ? self.prev() : self.next();
 
-			loopTimeoutId = window.setTimeout(loop, options.speed);
+			loopTimeoutId = window.setTimeout(function () {
+				loop(reversed);
+			}, options.speed);
 		};
 
 		options.width = options.width || 300;
@@ -43,7 +45,7 @@ var ThreeSixty = (function (window) {
 				return;
 			}
 
-			loop();
+			loop(reversed);
 			looping = true;
 		};
 
