@@ -42,6 +42,7 @@ var ThreeSixty = (function (window) {
 
 			document.addEventListener('mousemove', function (e) {
 			    if (dragOrigin && Math.abs(dragOrigin - e.pageX) > options.dragTolerance) {
+			    	self.stop();
 			        dragOrigin > e.pageX ? self.prev() : self.next();
 			        dragOrigin = e.pageX;
 			    }
