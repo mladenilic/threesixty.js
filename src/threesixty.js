@@ -25,6 +25,7 @@ var ThreeSixty = (function (window) {
 		options.keys = options.keys || true;
 		options.prev = options.prev || false;
 		options.next = options.next || false;
+		options.inverted = options.inverted || false;
 
 		container.style.width = options.width + 'px';
 		container.style.height = options.height + 'px';
@@ -88,12 +89,19 @@ var ThreeSixty = (function (window) {
 		}
 
 		self.next = function () {
-			index = index + 1 > options.count - 1 ? 0 : index + 1;
+			self.goTo(options.inverted ? index + 1 : index - 1);
 			self.update();
 		};
 
 		self.prev = function () {
-			index = index - 1 < 0 ? options.count - 1 : index - 1;
+			self.goTo(options.inverted ? index - 1 : index + 1);
+			self.update();
+		};
+
+		self.goTo = function (newIndex) {
+			newIndex = newIndex > options.count - 1 ? 0 : newIndex;
+			index = newIndex < 0 ? options.count - 1 : newIndex;
+
 			self.update();
 		};
 
