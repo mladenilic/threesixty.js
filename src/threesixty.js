@@ -21,7 +21,9 @@ var ThreeSixty = (function (window) {
 		options.perRow = options.perRow || 0;
 		options.speed = options.speed || 100;
 		options.dragTolerance = options.dragTolerance || 10;
+		options.swipeTolerance = options.dragTolerance || 10;
 		options.draggable = options.draggable || true;
+		options.swipeable = options.draggable || true;
 		options.keys = options.keys || true;
 		options.prev = options.prev || false;
 		options.next = options.next || false;
@@ -46,6 +48,24 @@ var ThreeSixty = (function (window) {
 			    	self.stop();
 			        dragOrigin > e.pageX ? self.prev() : self.next();
 			        dragOrigin = e.pageX;
+			    }
+			});
+		}
+
+		if (options.swipeable) {
+			container.addEventListener('touchstart', function (e) {
+			    dragOrigin = e.touches[0].clientX;
+			});
+
+			container.addEventListener('touchend', function () {
+			    dragOrigin = false;
+			});
+
+			document.addEventListener('touchmove', function (e) {
+			    if (dragOrigin && Math.abs(dragOrigin - e.touches[0].clientX) > options.swipeTolerance) {
+			    	self.stop();
+			        dragOrigin > e.touches[0].clientX ? self.prev() : self.next();
+			        dragOrigin = e.touches[0].clientX;
 			    }
 			});
 		}
