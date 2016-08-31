@@ -74,6 +74,11 @@ var ThreeSixty = (function (window) {
 				e.preventDefault();
 				self.stop();
 			});
+
+			options.prev.addEventListener('touchstart', function (e) {
+				e.preventDefault();
+				self.prev();
+			});
 		}
 
 		if (options.next) {
@@ -85,6 +90,11 @@ var ThreeSixty = (function (window) {
 			options.next.addEventListener('mouseup', function (e) {
 				e.preventDefault();
 				self.stop();
+			});
+
+			options.next.addEventListener('touchstart', function (e) {
+				e.preventDefault();
+				self.next();
 			});
 		}
 
