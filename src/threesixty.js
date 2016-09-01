@@ -157,6 +157,6 @@ var ThreeSixty = (function (window) {
 
             window.clearTimeout(loopTimeoutId);
             looping = false;
-        }
+        };
     };
 } (window));
