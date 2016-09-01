@@ -7,7 +7,7 @@ var ThreeSixty = (function (window) {
         var loopTimeoutId = null;
         var looping = false;
         var dragOrigin = false;
-        var loop = function (reversed = false) {
+        var loop = function (reversed) {
             reversed ? self.prev() : self.next();
 
             loopTimeoutId = window.setTimeout(function () {
