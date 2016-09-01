@@ -55,3 +55,7 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   threesixty.stop(); // Stop auto-rotate
 }
 ```
+
+### Licence
+
+Licensed under the MIT license.
