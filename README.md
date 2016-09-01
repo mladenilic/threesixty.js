@@ -1,9 +1,13 @@
 # ThreeSixty.js
-Let's you easily create 360 degree product image view
+Let's you easily create 360 degree product image view.
 
 ### Demo
 
 View on Codepen - [http://codepen.io/mladenilic/pen/zKOpmg](http://codepen.io/mladenilic/pen/zKOpmg)
+
+### Dependencies
+
+No dependacies! Written in plain javascript.
 
 ### Example
 ```js
