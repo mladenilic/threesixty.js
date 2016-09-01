@@ -3,7 +3,7 @@ Let's you easily create 360 degree product image view.
 
 ### Demo
 
-View on Codepen - [http://codepen.io/mladenilic/pen/zKOpmg](http://codepen.io/mladenilic/pen/zKOpmg)
+View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
 ### Dependencies
 
@@ -27,7 +27,7 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   image: 'images/example.jpg', // Path to 360 image sprite
   count: 30,                   // Total number of images. Default: 0
   perRow: 5,                   // Number of images per row. Default: 0
-  
+
   // Width & Height
   width: 300,  // Image width. Default 300
   height: 300, // Image height. Default 300
@@ -51,9 +51,9 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
 
 ```js
 {
-  threesixty.next(); // Rotate image forward    
+  threesixty.next(); // Rotate image forward
   threesixty.prev(); // Rotate image backward
-  threesixty.goTo(int index); // Turn to image (0 < index < options.count) 
+  threesixty.goTo(int index); // Turn to image (0 < index < options.count)
 
   threesixty.play(boolean reversed); // Auto-rotate image
   threesixty.stop(); // Stop auto-rotate

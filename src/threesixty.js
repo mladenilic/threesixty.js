@@ -40,7 +40,7 @@ var ThreeSixty = (function (window) {
                 dragOrigin = e.pageX;
             });
 
-            container.addEventListener('mouseup', function () {
+            document.addEventListener('mouseup', function () {
                 dragOrigin = false;
             });
 
