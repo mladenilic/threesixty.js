@@ -1,4 +1,5 @@
 var ThreeSixty = (function (window) {
+    'use strict';
 
     return function (container, options) {
         var self = this;
