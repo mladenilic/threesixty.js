@@ -50,14 +50,12 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
 ### Methods
 
 ```js
-{
-  threesixty.next(); // Rotate image forward
-  threesixty.prev(); // Rotate image backward
-  threesixty.goTo(int index); // Turn to image (0 < index < options.count)
+threesixty.next(); // Rotate image forward
+threesixty.prev(); // Rotate image backward
+threesixty.goTo(int index); // Turn to image (0 < index < options.count)
 
-  threesixty.play(boolean reversed); // Auto-rotate image
-  threesixty.stop(); // Stop auto-rotate
-}
+threesixty.play(boolean reversed); // Auto-rotate image
+threesixty.stop(); // Stop auto-rotate
 ```
 
 ### Licence
