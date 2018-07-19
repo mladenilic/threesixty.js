@@ -34,6 +34,7 @@ var ThreeSixty = (function (window) {
         container.style.height = options.height + 'px';
         container.style.backgroundImage = 'url("' + options.image + '")';
         container.style.backgroundPosition = '0 0';
+        container.style.backgroundSize = (options.perRow * 100) + '%';
 
         if (options.draggable) {
             container.addEventListener('mousedown', function (e) {
