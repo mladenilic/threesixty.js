@@ -56,6 +56,7 @@ threesixty.goTo(int index); // Turn to image (0 < index < options.count)
 
 threesixty.play(boolean reversed); // Auto-rotate image
 threesixty.stop(); // Stop auto-rotate
+threesixty.destroy(); // Clean up registred events
 ```
 
 ### Licence
