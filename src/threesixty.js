@@ -16,6 +16,77 @@ var ThreeSixty = (function (window) {
             }, options.speed);
         };
 
+        var eventHanlers = {
+            container: {
+                mousedown: function (e) {
+                    dragOrigin = e.pageX;
+                },
+                touchstart: function (e) {
+                    dragOrigin = e.touches[0].clientX;
+                },
+                touchend: function () {
+                    dragOrigin = false;
+                }
+            },
+            prev: {
+                mousedown: function (e) {
+                    e.preventDefault();
+                    self.play(true);
+                },
+                mouseup: function (e) {
+                    e.preventDefault();
+                    self.stop();
+                },
+                touchstart: function (e) {
+                    e.preventDefault();
+                    self.prev();
+                }
+            },
+            next: {
+                mousedown: function (e) {
+                    e.preventDefault();
+                    self.play();
+                },
+                mouseup: function (e) {
+                    e.preventDefault();
+                    self.stop();
+                },
+                touchstart: function (e) {
+                    e.preventDefault();
+                    self.next();
+                }
+            },
+            document: {
+                mouseup: function () {
+                    dragOrigin = false;
+                },
+                mousemove: function (e) {
+                    if (dragOrigin && Math.abs(dragOrigin - e.pageX) > options.dragTolerance) {
+                        self.stop();
+                        dragOrigin > e.pageX ? self.prev() : self.next();
+                        dragOrigin = e.pageX;
+                    }
+                },
+                touchmove: function (e) {
+                    if (dragOrigin && Math.abs(dragOrigin - e.touches[0].clientX) > options.swipeTolerance) {
+                        self.stop();
+                        dragOrigin > e.touches[0].clientX ? self.prev() : self.next();
+                        dragOrigin = e.touches[0].clientX;
+                    }
+                },
+                keydown: function (e) {
+                    if ([37, 39].includes(e.keyCode)) {
+                        self.play(37 === e.keyCode);
+                    }
+                },
+                keyup: function (e) {
+                    if ([37, 39].includes(e.keyCode)) {
+                        self.stop();
+                    }
+                }
+            }
+        }
+
         options.width = options.width || 300;
         options.height = options.height || 300;
         options.count = options.count || 0;
@@ -37,87 +108,32 @@ var ThreeSixty = (function (window) {
         container.style.backgroundSize = (options.perRow * 100) + '%';
 
         if (options.draggable) {
-            container.addEventListener('mousedown', function (e) {
-                dragOrigin = e.pageX;
-            });
-
-            document.addEventListener('mouseup', function () {
-                dragOrigin = false;
-            });
-
-            document.addEventListener('mousemove', function (e) {
-                if (dragOrigin && Math.abs(dragOrigin - e.pageX) > options.dragTolerance) {
-                    self.stop();
-                    dragOrigin > e.pageX ? self.prev() : self.next();
-                    dragOrigin = e.pageX;
-                }
-            });
+            container.addEventListener('mousedown', eventHanlers.container.mousedown);
+            document.addEventListener('mouseup', eventHanlers.document.mouseup);
+            document.addEventListener('mousemove', eventHanlers.document.mousemove);
         }
 
         if (options.swipeable) {
-            container.addEventListener('touchstart', function (e) {
-                dragOrigin = e.touches[0].clientX;
-            });
-
-            container.addEventListener('touchend', function () {
-                dragOrigin = false;
-            });
-
-            document.addEventListener('touchmove', function (e) {
-                if (dragOrigin && Math.abs(dragOrigin - e.touches[0].clientX) > options.swipeTolerance) {
-                    self.stop();
-                    dragOrigin > e.touches[0].clientX ? self.prev() : self.next();
-                    dragOrigin = e.touches[0].clientX;
-                }
-            });
+            container.addEventListener('touchstart', eventHanlers.container.touchstart);
+            container.addEventListener('touchend', eventHanlers.container.touchend);
+            document.addEventListener('touchmove', eventHanlers.document.touchmove);
         }
 
         if (options.keys) {
-            document.addEventListener('keydown', function (e) {
-                if ([37, 39].includes(e.keyCode)) {
-                    self.play(37 === e.keyCode);
-                }
-            });
-
-            document.addEventListener('keyup', function (e) {
-                if ([37, 39].includes(e.keyCode)) {
-                    self.stop();
-                }
-            });
+            document.addEventListener('keydown', eventHanlers.document.keydown);
+            document.addEventListener('keyup', eventHanlers.document.keyup);
         }
 
         if (options.prev) {
-            options.prev.addEventListener('mousedown', function (e) {
-                e.preventDefault();
-                self.play(true);
-            });
-
-            options.prev.addEventListener('mouseup', function (e) {
-                e.preventDefault();
-                self.stop();
-            });
-
-            options.prev.addEventListener('touchstart', function (e) {
-                e.preventDefault();
-                self.prev();
-            });
+            options.prev.addEventListener('mousedown', eventHanlers.prev.mousedown);
+            options.prev.addEventListener('mouseup', eventHanlers.prev.mouseup);
+            options.prev.addEventListener('touchstart', eventHanlers.prev.touchstart);
         }
 
         if (options.next) {
-            options.next.addEventListener('mousedown', function (e) {
-                e.preventDefault();
-                self.play();
-            });
-
-            options.next.addEventListener('mouseup', function (e) {
-                e.preventDefault();
-                self.stop();
-            });
-
-            options.next.addEventListener('touchstart', function (e) {
-                e.preventDefault();
-                self.next();
-            });
+            options.next.addEventListener('mousedown', eventHanlers.next.mousedown);
+            options.next.addEventListener('mouseup', eventHanlers.next.mouseup);
+            options.next.addEventListener('touchstart', eventHanlers.next.touchstart);
         }
 
         self.next = function () {
@@ -159,5 +175,38 @@ var ThreeSixty = (function (window) {
             window.clearTimeout(loopTimeoutId);
             looping = false;
         };
+
+        self.destroy = function () {
+            self.stop();
+
+            container.removeEventListener('mousedown', eventHanlers.container.mousedown);
+            container.removeEventListener('touchstart', eventHanlers.container.touchstart);
+            container.removeEventListener('touchend', eventHanlers.container.touchend);
+
+            document.removeEventListener('mouseup', eventHanlers.document.mouseup);
+            document.removeEventListener('mousemove', eventHanlers.document.mousemove);
+            document.removeEventListener('touchmove', eventHanlers.document.touchmove);
+            document.removeEventListener('keydown', eventHanlers.document.keydown);
+            document.removeEventListener('keyup', eventHanlers.document.keyup);
+
+            if (options.prev) {
+                options.prev.removeEventListener('mousedown', eventHanlers.prev.mousedown);
+                options.prev.removeEventListener('mouseup', eventHanlers.prev.mouseup);
+                options.prev.removeEventListener('touchstart', eventHanlers.prev.touchstart);
+            }
+
+
+            if (options.next) {
+                options.next.removeEventListener('mousedown', eventHanlers.next.mousedown);
+                options.next.removeEventListener('mouseup', eventHanlers.next.mouseup);
+                options.next.removeEventListener('touchstart', eventHanlers.next.touchstart);
+            }
+
+            container.style.width = '';
+            container.style.height = '';
+            container.style.backgroundImage = '';
+            container.style.backgroundPosition = '';
+            container.style.backgroundSize = '';
+        }
     };
 } (window));
