@@ -16,8 +16,8 @@
         "product"
     ],
     "repository": {
-      "type": "git",
-      "url": "https://github.com/mladenilic/threesixty"
+        "type": "git",
+        "url": "https://github.com/mladenilic/threesixty"
     },
     "homepage": "https://github.com/mladenilic/threesixty",
     "license": "MIT"
