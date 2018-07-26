@@ -195,7 +195,6 @@ var ThreeSixty = (function (window) {
                 options.prev.removeEventListener('touchstart', eventHanlers.prev.touchstart);
             }
 
-
             if (options.next) {
                 options.next.removeEventListener('mousedown', eventHanlers.next.mousedown);
                 options.next.removeEventListener('mouseup', eventHanlers.next.mouseup);
