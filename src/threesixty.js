@@ -93,10 +93,10 @@ var ThreeSixty = (function (window) {
         options.perRow = options.perRow || 0;
         options.speed = options.speed || 100;
         options.dragTolerance = options.dragTolerance || 10;
-        options.swipeTolerance = options.dragTolerance || 10;
-        options.draggable = options.draggable || true;
-        options.swipeable = options.draggable || true;
-        options.keys = options.keys || true;
+        options.swipeTolerance = options.dragTolerance || 10; 
+        options.draggable = options.hasOwnProperty("draggable") ? options.draggable : true;
+        options.swipeable = options.hasOwnProperty("swipeable") ? options.swipeable : true;
+        options.keys = options.hasOwnProperty("keys") ? options.keys : true;        
         options.prev = options.prev || false;
         options.next = options.next || false;
         options.inverted = options.inverted || false;
@@ -194,7 +194,6 @@ var ThreeSixty = (function (window) {
                 options.prev.removeEventListener('mouseup', eventHanlers.prev.mouseup);
                 options.prev.removeEventListener('touchstart', eventHanlers.prev.touchstart);
             }
-
 
             if (options.next) {
                 options.next.removeEventListener('mousedown', eventHanlers.next.mousedown);
