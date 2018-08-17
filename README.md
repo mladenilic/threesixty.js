@@ -10,6 +10,7 @@ View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/
 No dependacies! Written in plain javascript.
 
 ### Example
+
 ```js
 var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   image: 'images/example.jpg',
@@ -57,6 +58,16 @@ threesixty.goTo(int index); // Turn to image (0 < index < options.count)
 threesixty.play(boolean reversed); // Auto-rotate image
 threesixty.stop(); // Stop auto-rotate
 threesixty.destroy(); // Clean up registred events
+```
+
+### Build minified file
+
+Run following to build `dist/threesixy.min.js`:
+```
+npm install -g grunt-cli
+npm install
+
+grunt uglify
 ```
 
 ### Licence
