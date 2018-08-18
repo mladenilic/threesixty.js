@@ -1,6 +1,8 @@
 # ThreeSixty.js
 Let's you easily create 360 degree product image view.
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
+
 ### Demo
 
 View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
