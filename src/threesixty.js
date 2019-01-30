@@ -4,6 +4,8 @@ var ThreeSixty = (function (window) {
     return function (container, options) {
         var self = this;
         var index = 0;
+        self.imagesLoaded = 0;
+        self.arrayImages = [];
 
         var loopTimeoutId = null;
         var looping = false;
@@ -15,7 +17,7 @@ var ThreeSixty = (function (window) {
                 loop(reversed);
             }, options.speed);
         };
-
+        
         var eventHanlers = {
             container: {
                 mousedown: function (e) {
@@ -103,9 +105,32 @@ var ThreeSixty = (function (window) {
 
         container.style.width = options.width + 'px';
         container.style.height = options.height + 'px';
-        container.style.backgroundImage = 'url("' + options.image + '")';
-        container.style.backgroundPosition = '0 0';
-        container.style.backgroundSize = (options.perRow * 100) + '%';
+
+        self.loadImages = function() {
+            for (var i = 0; i < options.count; i++) {
+                self.arrayImages[i] = new Image();
+                self.arrayImages[i].src = options.array[i];
+                self.arrayImages[i].onload = function() {
+                    self.imagesLoaded++;
+                    if (self.imagesLoaded === options.count) {
+                        self.loadComplete();
+                    }
+                };
+            }
+        };
+
+        self.loadComplete = function() {
+            container.style.backgroundImage =  'url("' + self.arrayImages[index].src + '")';
+        };
+        
+        if (options.array) {
+            self.loadImages();
+        }
+        if (options.image) {
+            container.style.backgroundImage = 'url("' + options.image + '")';
+            container.style.backgroundPosition = '0 0';
+            container.style.backgroundSize = (options.perRow * 100) + '%';
+        }
 
         if (options.draggable) {
             container.addEventListener('mousedown', eventHanlers.container.mousedown);
@@ -154,8 +179,13 @@ var ThreeSixty = (function (window) {
         };
 
         self.update = function () {
-            container.style.backgroundPositionX = -(index % options.perRow) * options.width + 'px';
-            container.style.backgroundPositionY = -Math.floor(index / options.perRow) * options.height + 'px';
+            if (options.array) {
+                container.style.backgroundImage = 'url("' + self.arrayImages[index].src + '")';
+            }
+            if (options.image) {
+                container.style.backgroundPositionX = -(index % options.perRow) * options.width + 'px';
+                container.style.backgroundPositionY = -Math.floor(index / options.perRow) * options.height + 'px';
+            }
         };
 
         self.play = function (reversed) {
