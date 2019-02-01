@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 spinner test</title>
+
+    <style>
+    .wrapper {
+      background-color: aqua;
+    }
+    #threesixty {
+      margin: 0 auto;
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+      cursor: -o-grab;
+      cursor: -ms-move;
+      cursor: grab;
+    }
+
+    </style>
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src='src/threesixty.js'></script>
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+      <div id="threesixty">
+      </div>
+    </div>
+
+    <script >
+
+      var arrayImages = [
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C01.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C02.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C03.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C04.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C05.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C06.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C07.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C08.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C09.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C10.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C11.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C12.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C13.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C14.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C15.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C16.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C17.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C18.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C19.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C20.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C21.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C22.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C23.jpg?profile=400",
+                  "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C24.jpg?profile=400",
+                ];
+      
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
+                array:  arrayImages,
+                width: 500,
+                height: 500,
+                count: 24,
+                speed: 100,
+                inverted: false
+            });
+
+            threesixty.play();
+        }, false);
+    </script>
+
+  </body>
+
+</html>
+ 
