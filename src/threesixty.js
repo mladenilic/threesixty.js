@@ -120,10 +120,16 @@ var ThreeSixty = (function (window) {
                 arrayImages[i].onload = function() {
                     self.imagesLoaded++;
                     if (self.imagesLoaded === options.count) {
-                        self.play();
+                        self.loadComplete();
                     }
                 };
                 arrayImages[i].src = options.array[i];
+            }
+        };
+
+        self.loadComplete = function() {
+            if(!looping) {
+                $(container).find('img').attr("src", arrayImages[index].src);
             }
         };
         
