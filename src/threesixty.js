@@ -5,7 +5,7 @@ var ThreeSixty = (function (window) {
         var self = this;
         var index = 0;
         self.imagesLoaded = 0;
-        self.arrayImages = [];
+        var arrayImages = [];
 
         var loopTimeoutId = null;
         var looping = false;
@@ -21,9 +21,15 @@ var ThreeSixty = (function (window) {
         var eventHanlers = {
             container: {
                 mousedown: function (e) {
+                    if (options.array) {
+                        e.preventDefault();
+                    }
                     dragOrigin = e.pageX;
                 },
                 touchstart: function (e) {
+                    if (options.array) {
+                        e.preventDefault();
+                    }
                     dragOrigin = e.touches[0].clientX;
                 },
                 touchend: function () {
@@ -103,29 +109,34 @@ var ThreeSixty = (function (window) {
         options.next = options.next || false;
         options.inverted = options.inverted || false;
 
-        container.style.width = options.width + 'px';
-        container.style.height = options.height + 'px';
+        if(options.image) {
+            container.style.width = options.width + 'px';
+            container.style.height = options.height + 'px';
+        } 
 
         self.loadImages = function() {
             for (var i = 0; i < options.count; i++) {
-                self.arrayImages[i] = new Image();
-                self.arrayImages[i].src = options.array[i];
-                self.arrayImages[i].onload = function() {
+                arrayImages[i] = new Image();
+                arrayImages[i].onload = function() {
                     self.imagesLoaded++;
                     if (self.imagesLoaded === options.count) {
-                        self.loadComplete();
+                        self.play();
                     }
                 };
+                arrayImages[i].src = options.array[i];
             }
         };
 
         self.loadComplete = function() {
-            container.style.backgroundImage =  'url("' + self.arrayImages[index].src + '")';
+            if(self.arrayImages.length === options.array.length) {
+                $(container).find('img').attr("src", arrayImages[index].src);
+            }
         };
         
         if (options.array) {
             self.loadImages();
         }
+        
         if (options.image) {
             container.style.backgroundImage = 'url("' + options.image + '")';
             container.style.backgroundPosition = '0 0';
@@ -180,7 +191,7 @@ var ThreeSixty = (function (window) {
 
         self.update = function () {
             if (options.array) {
-                container.style.backgroundImage = 'url("' + self.arrayImages[index].src + '")';
+                $(container).find('img').attr("src", arrayImages[index].src);
             }
             if (options.image) {
                 container.style.backgroundPositionX = -(index % options.perRow) * options.width + 'px';

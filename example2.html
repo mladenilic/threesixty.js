@@ -8,18 +8,27 @@
     <title>360 spinner test</title>
 
     <style>
-
-    #threesixty {
-      margin: 0 auto;
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Do not repeat the image */
-      background-size: cover; /* Resize the background image to cover the entire container */
-      cursor: -moz-grab;
-      cursor: -webkit-grab;
-      cursor: -o-grab;
-      cursor: -ms-move;
-      cursor: grab;
-    }
+      
+      .wrapper {
+          position: relative;
+          width: 100vw;
+          height: 100vh;
+      }
+      #threesixty img {
+          position: absolute;
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          cursor: -moz-grab;
+          cursor: -webkit-grab;
+          cursor: -o-grab;
+          cursor: -ms-move;
+          cursor: grab;
+      }
 
     </style>
 
@@ -34,12 +43,15 @@
 
     <div class="wrapper">
       <div id="threesixty">
+        <img src="" alt="">
       </div>
     </div>
 
     <script >
 
-      var arrayImages = [
+      $(function() {
+        'use strict';
+        var arrayImages = [
                   "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C01.jpg?profile=400",
                   "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C02.jpg?profile=400",
                   "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C03.jpg?profile=400",
@@ -66,23 +78,17 @@
                   "http://www.thdstatic.com/spin/12/100072312/100072312_S01_R01_C24.jpg?profile=400",
                 ];
       
+        var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
+          array:  arrayImages,
+          count: 24,
+          speed: 100,
+          inverted: false
+        });
 
-        document.addEventListener("DOMContentLoaded", function() {
+        threesixty.play();
 
-            var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
-                array:  arrayImages,
-                width: 500,
-                height: 500,
-                count: 24,
-                speed: 100,
-                inverted: false
-            });
-
-            threesixty.play();
-        }, false);
+      });
     </script>
 
   </body>
-
 </html>
- 
