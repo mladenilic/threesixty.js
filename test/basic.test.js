@@ -4,8 +4,9 @@ const ThreeSixty = require('../dist/threesixty');
 describe('Basic Features', () => {
   before(() => {
     this.container = document.getElementById('threesixty');
+    this.image = 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg'
     this.threesixty = new ThreeSixty(document.getElementById('threesixty'), {
-      image: 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg',
+      image: this.image,
       width: 320,
       height: 320,
       count: 31,
@@ -14,7 +15,7 @@ describe('Basic Features', () => {
   });
 
   it('should set container properties', () => {
-    expect(this.container.style.backgroundImage).to.be.equal('url(https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg)');
+    expect(this.container.style.backgroundImage).to.be.equal(`url(${this.image})`);
     expect(this.container.style.backgroundSize).to.be.equal('400%');
     expect(this.container.style.backgroundPositionX).to.be.equal('0px');
     expect(this.container.style.backgroundPositionY).to.be.equal('0px');
@@ -37,6 +38,24 @@ describe('Basic Features', () => {
     this.threesixty.prev();
 
     expect(this.threesixty.index).to.be.equal(1);
+  });
+
+  it('should correctly update current index when goto is used', () => {
+    this.threesixty.goto(0);
+
+    expect(this.threesixty.index).to.be.equal(0);
+
+    this.threesixty.goto(4);
+
+    expect(this.threesixty.index).to.be.equal(4);
+
+    this.threesixty.goto(-1);
+
+    expect(this.threesixty.index).to.be.equal(30);
+
+    this.threesixty.goto(34);
+
+    expect(this.threesixty.index).to.be.equal(3);
   });
 
   it('should update looping status when played/stopped', () => {
