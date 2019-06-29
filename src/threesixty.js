@@ -13,8 +13,6 @@ class ThreeSixty {
             draggable: true,
             swipeable: true,
             keys: true,
-            prev: true,
-            next: true,
             inverted: false
         }, options);
 
