@@ -4,7 +4,7 @@ const ThreeSixty = require('../dist/threesixty');
 describe('Basic Features', () => {
   before(() => {
     this.container = document.getElementById('threesixty');
-    this.image = 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg'
+    this.image = 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg';
     this.threesixty = new ThreeSixty(document.getElementById('threesixty'), {
       image: this.image,
       width: 320,
