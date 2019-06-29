@@ -141,6 +141,10 @@ class ThreeSixty {
         }
     }
 
+    get index() {
+        return this.#index;
+    }
+
     next() {
         this.goto(this.options.inverted ? this.#index - 1 : this.#index + 1);
     }
