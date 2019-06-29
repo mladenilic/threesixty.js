@@ -1,4 +1,7 @@
 # ThreeSixty.js
+[![npm version](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js.svg)](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js)
+[![CircleCI](https://circleci.com/gh/mladenilic/threesixty.svg?style=svg)](https://circleci.com/gh/mladenilic/threesixty)
+
 Turn image sprite into 360 degree image.
 
 ![sample.gif](https://s3.eu-central-1.amazonaws.com/threesixty.js/sample.gif)
