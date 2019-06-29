@@ -107,6 +107,9 @@ threesixty.play(true);
 
 // Stop rotation
 threesixty.stop();
+
+// Play/Stop rotation
+threesixty.toggle();
 ```
 
 Clean up registered events:
