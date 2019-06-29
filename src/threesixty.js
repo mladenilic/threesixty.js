@@ -1,4 +1,6 @@
 class ThreeSixty {
+    #index = 0;
+
     constructor(container, options) {
         this.container = container;
 
@@ -23,8 +25,6 @@ class ThreeSixty {
         if (!this.sprite) {
             this.options.count = this.options.image.length;
         }
-
-        this.index = 0;
 
         this.loopTimeoutId = null;
         this.looping = false;
@@ -142,15 +142,15 @@ class ThreeSixty {
     }
 
     next() {
-        this.goto(this.options.inverted ? this.index + 1 : this.index - 1);
+        this.goto(this.options.inverted ? this.#index - 1 : this.#index + 1);
     }
 
     prev() {
-        this.goto(this.options.inverted ? this.index - 1 : this.index + 1);
+        this.goto(this.options.inverted ? this.#index + 1 : this.#index - 1);
     }
 
     goto(index) {
-        this.index = (this.options.count + index) % this.options.count;
+        this.#index = (this.options.count + index) % this.options.count;
 
         this.update();
     }
@@ -183,10 +183,10 @@ class ThreeSixty {
 
     update () {
         if (this.sprite) {
-            this.container.style.backgroundPositionX = -(this.index % this.options.perRow) * this.options.width + 'px';
-            this.container.style.backgroundPositionY = -Math.floor(this.index / this.options.perRow) * this.options.height + 'px';
+            this.container.style.backgroundPositionX = -(this.#index % this.options.perRow) * this.options.width + 'px';
+            this.container.style.backgroundPositionY = -Math.floor(this.#index / this.options.perRow) * this.options.height + 'px';
         } else {
-            this.container.style.backgroundImage = `url("${this.options.image[this.index]}")`;
+            this.container.style.backgroundImage = `url("${this.options.image[this.#index]}")`;
         }
     }
 
