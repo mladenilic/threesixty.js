@@ -119,7 +119,7 @@ class ThreeSixty {
   }
 
   play (reversed) {
-    if (this.#looping) {
+    if (this.looping) {
       return;
     }
 
@@ -128,7 +128,7 @@ class ThreeSixty {
   }
 
   stop () {
-    if (!this.#looping) {
+    if (!this.looping) {
       return;
     }
 
