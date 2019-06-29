@@ -143,6 +143,10 @@ class ThreeSixty {
         return this.#index;
     }
 
+    get looping() {
+        return this.#looping;
+    }
+
     next() {
         this.goto(this.options.inverted ? this.#index - 1 : this.#index + 1);
     }
