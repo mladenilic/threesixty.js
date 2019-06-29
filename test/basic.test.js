@@ -36,4 +36,16 @@ describe('Basic Features', () => {
 
     expect(this.threesixty.index).to.be.equal(1);
   });
+
+  it('should update looping status when played/stopped', () => {
+    expect(this.threesixty.looping).to.be.equal(false);
+
+    this.threesixty.play();
+
+    expect(this.threesixty.looping).to.be.equal(true);
+
+    this.threesixty.stop();
+
+    expect(this.threesixty.looping).to.be.equal(false);
+  });
 });
