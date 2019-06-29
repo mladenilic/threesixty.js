@@ -92,51 +92,8 @@ class ThreeSixty {
       }
     };
 
-    this.initContainer();
-    this.initEvents();
-  }
-
-  initContainer() {
-    this.container.style.width = this.options.width + 'px';
-    this.container.style.height = this.options.height + 'px';
-
-    if (this.sprite) {
-      this.container.style.backgroundImage = `url("${this.options.image}")`;
-      this.container.style.backgroundSize = (this.options.perRow * 100) + '%';
-    }
-
-    this.update();
-  }
-
-  initEvents() {
-    if (this.options.draggable) {
-      this.options.swipeTarget.addEventListener('mousedown', this.eventHandlers.container.mousedown);
-      global.addEventListener('mouseup', this.eventHandlers.global.mouseup);
-      global.addEventListener('mousemove', this.eventHandlers.global.mousemove);
-    }
-
-    if (this.options.swipeable) {
-      this.options.swipeTarget.addEventListener('touchstart', this.eventHandlers.container.touchstart);
-      this.options.swipeTarget.addEventListener('touchend', this.eventHandlers.container.touchend);
-      global.addEventListener('touchmove', this.eventHandlers.global.touchmove);
-    }
-
-    if (this.options.keys) {
-      global.addEventListener('keydown', this.eventHandlers.global.keydown);
-      global.addEventListener('keyup', this.eventHandlers.global.keyup);
-    }
-
-    if (this.options.prev) {
-      this.options.prev.addEventListener('mousedown', this.eventHandlers.prev.mousedown);
-      this.options.prev.addEventListener('mouseup', this.eventHandlers.prev.mouseup);
-      this.options.prev.addEventListener('touchstart', this.eventHandlers.prev.touchstart);
-    }
-
-    if (this.options.next) {
-      this.options.next.addEventListener('mousedown', this.eventHandlers.next.mousedown);
-      this.options.next.addEventListener('mouseup', this.eventHandlers.next.mouseup);
-      this.options.next.addEventListener('touchstart', this.eventHandlers.next.touchstart);
-    }
+    this._initContainer();
+    this._initEvents();
   }
 
   get index() {
@@ -158,15 +115,7 @@ class ThreeSixty {
   goto(index) {
     this.#index = (this.options.count + index) % this.options.count;
 
-    this.update();
-  }
-
-  loop(reversed) {
-    reversed ? this.prev() : this.next();
-
-    this.#loopTimeoutId = global.setTimeout(() => {
-      this.loop(reversed);
-    }, this.options.speed);
+    this._update();
   }
 
   play (reversed) {
@@ -174,7 +123,7 @@ class ThreeSixty {
       return;
     }
 
-    this.loop(reversed);
+    this._loop(reversed);
     this.#looping = true;
   }
 
@@ -185,15 +134,6 @@ class ThreeSixty {
 
     global.clearTimeout(this.#loopTimeoutId);
     this.#looping = false;
-  }
-
-  update () {
-    if (this.sprite) {
-      this.container.style.backgroundPositionX = -(this.#index % this.options.perRow) * this.options.width + 'px';
-      this.container.style.backgroundPositionY = -Math.floor(this.#index / this.options.perRow) * this.options.height + 'px';
-    } else {
-      this.container.style.backgroundImage = `url("${this.options.image[this.#index]}")`;
-    }
   }
 
   destroy() {
@@ -227,6 +167,66 @@ class ThreeSixty {
     this.container.style.backgroundPositionX = '';
     this.container.style.backgroundPositionY = '';
     this.container.style.backgroundSize = '';
+  }
+
+   _loop(reversed) {
+    reversed ? this.prev() : this.next();
+
+    this.#loopTimeoutId = global.setTimeout(() => {
+      this._loop(reversed);
+    }, this.options.speed);
+  }
+
+  _update () {
+    if (this.sprite) {
+      this.container.style.backgroundPositionX = -(this.#index % this.options.perRow) * this.options.width + 'px';
+      this.container.style.backgroundPositionY = -Math.floor(this.#index / this.options.perRow) * this.options.height + 'px';
+    } else {
+      this.container.style.backgroundImage = `url("${this.options.image[this.#index]}")`;
+    }
+  }
+
+  _initContainer() {
+    this.container.style.width = this.options.width + 'px';
+    this.container.style.height = this.options.height + 'px';
+
+    if (this.sprite) {
+      this.container.style.backgroundImage = `url("${this.options.image}")`;
+      this.container.style.backgroundSize = (this.options.perRow * 100) + '%';
+    }
+
+    this._update();
+  }
+
+  _initEvents() {
+    if (this.options.draggable) {
+      this.options.swipeTarget.addEventListener('mousedown', this.eventHandlers.container.mousedown);
+      global.addEventListener('mouseup', this.eventHandlers.global.mouseup);
+      global.addEventListener('mousemove', this.eventHandlers.global.mousemove);
+    }
+
+    if (this.options.swipeable) {
+      this.options.swipeTarget.addEventListener('touchstart', this.eventHandlers.container.touchstart);
+      this.options.swipeTarget.addEventListener('touchend', this.eventHandlers.container.touchend);
+      global.addEventListener('touchmove', this.eventHandlers.global.touchmove);
+    }
+
+    if (this.options.keys) {
+      global.addEventListener('keydown', this.eventHandlers.global.keydown);
+      global.addEventListener('keyup', this.eventHandlers.global.keyup);
+    }
+
+    if (this.options.prev) {
+      this.options.prev.addEventListener('mousedown', this.eventHandlers.prev.mousedown);
+      this.options.prev.addEventListener('mouseup', this.eventHandlers.prev.mouseup);
+      this.options.prev.addEventListener('touchstart', this.eventHandlers.prev.touchstart);
+    }
+
+    if (this.options.next) {
+      this.options.next.addEventListener('mousedown', this.eventHandlers.next.mousedown);
+      this.options.next.addEventListener('mouseup', this.eventHandlers.next.mouseup);
+      this.options.next.addEventListener('touchstart', this.eventHandlers.next.touchstart);
+    }
   }
 }
 
