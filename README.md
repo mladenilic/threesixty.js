@@ -53,21 +53,11 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
 ```js
 threesixty.next(); // Rotate image forward
 threesixty.prev(); // Rotate image backward
-threesixty.goTo(int index); // Turn to image (0 < index < options.count)
+threesixty.goto(int index); // Turn to image (0 < index < options.count)
 
 threesixty.play(boolean reversed); // Auto-rotate image
 threesixty.stop(); // Stop auto-rotate
 threesixty.destroy(); // Clean up registred events
-```
-
-### Build minified file
-
-Run following to build `dist/threesixy.min.js`:
-```
-npm install -g grunt-cli
-npm install
-
-grunt uglify
 ```
 
 ### Licence
