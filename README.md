@@ -5,8 +5,19 @@ Turn image sprite into 360 degree image.
 
 View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
-### Dependencies
+### Install
+ThreeSixty is available as NPM package
+```
+npm i @mladenilic/threesixty.js
+```
 
+You can also use it via a CDN
+```html
+<script src="https://cdn.jsdelivr.net/npm/@mladenilic/threesixty.js/dist/threesixty.js"></script>
+```
+
+
+### Dependencies
 No dependacies! Written in plain javascript.
 
 ### Example
