@@ -56,6 +56,7 @@ threesixty.play();
   swipeable: true,    // Rotate image by swiping on mobile screens. Default: true
   dragTolerance: 10,  // Rotation speed when dragging. Default: 10
   swipeTolerance: 10, // Rotation speed when swiping. Default: 10
+  swipeTarget: null, // Element which will listen for drag/swipe events. Default: Image container 
 
   // Rotation settings
   speed: 100,     // Rotation speed during 'play' mode. Default: 10

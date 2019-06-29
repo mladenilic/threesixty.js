@@ -18,6 +18,8 @@ class ThreeSixty {
             inverted: false
         }, options);
 
+        this.options.swipeTarget = this.options.swipeTarget || this.container;
+
         this.sprite = !Array.isArray(this.options.image);
 
         if (!this.sprite) {
@@ -112,14 +114,14 @@ class ThreeSixty {
 
     initEvents() {
         if (this.options.draggable) {
-            this.container.addEventListener('mousedown', this.eventHandlers.container.mousedown);
+            this.options.swipeTarget.addEventListener('mousedown', this.eventHandlers.container.mousedown);
             global.addEventListener('mouseup', this.eventHandlers.global.mouseup);
             global.addEventListener('mousemove', this.eventHandlers.global.mousemove);
         }
 
         if (this.options.swipeable) {
-            this.container.addEventListener('touchstart', this.eventHandlers.container.touchstart);
-            this.container.addEventListener('touchend', this.eventHandlers.container.touchend);
+            this.options.swipeTarget.addEventListener('touchstart', this.eventHandlers.container.touchstart);
+            this.options.swipeTarget.addEventListener('touchend', this.eventHandlers.container.touchend);
             global.addEventListener('touchmove', this.eventHandlers.global.touchmove);
         }
 
@@ -193,9 +195,9 @@ class ThreeSixty {
     destroy() {
         this.stop();
 
-        this.container.removeEventListener('mousedown', this.eventHandlers.container.mousedown);
-        this.container.removeEventListener('touchstart', this.eventHandlers.container.touchstart);
-        this.container.removeEventListener('touchend', this.eventHandlers.container.touchend);
+        this.options.swipeTarget.removeEventListener('mousedown', this.eventHandlers.container.mousedown);
+        this.options.swipeTarget.removeEventListener('touchstart', this.eventHandlers.container.touchstart);
+        this.options.swipeTarget.removeEventListener('touchend', this.eventHandlers.container.touchend);
 
         global.removeEventListener('mouseup', this.eventHandlers.global.mouseup);
         global.removeEventListener('mousemove', this.eventHandlers.global.mousemove);
