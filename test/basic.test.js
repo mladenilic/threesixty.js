@@ -5,11 +5,11 @@ describe('Basic Features', () => {
   before(() => {
     this.container = document.getElementById('threesixty');
     this.threesixty = new ThreeSixty(document.getElementById('threesixty'), {
-        image: 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg',
-        width: 320,
-        height: 320,
-        count: 31,
-        perRow: 4
+      image: 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg',
+      width: 320,
+      height: 320,
+      count: 31,
+      perRow: 4
     });
   });
 
