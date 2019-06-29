@@ -70,6 +70,19 @@ describe('Basic Features', () => {
     expect(this.threesixty.looping).to.be.equal(false);
   });
 
+  it('should update looping status when toggled', () => {
+    expect(this.threesixty.looping).to.be.equal(false);
+
+    this.threesixty.toggle();
+
+    expect(this.threesixty.looping).to.be.equal(true);
+
+    this.threesixty.toggle();
+
+    expect(this.threesixty.looping).to.be.equal(false);
+  });
+
+
   it('should clean up container properties after destroy', () => {
     this.threesixty.destroy();
 

@@ -85,6 +85,10 @@ class ThreeSixty {
     this.#looping = false;
   }
 
+  toggle(reversed) {
+    this.looping ? this.stop() : this.play(reversed);
+  }
+
   destroy() {
     this.stop();
 
