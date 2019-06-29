@@ -1,7 +1,7 @@
 # ThreeSixty.js
-Let's you easily create 360 degree product image view.
+Turn image sprite into 360 degree image.
 
-### Demo
+![sample.gif](https://s3.eu-central-1.amazonaws.com/threesixty.js/sample.gif)
 
 View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
@@ -12,7 +12,7 @@ No dependacies! Written in plain javascript.
 ### Example
 
 ```js
-var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
+const threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   image: 'images/example.jpg',
   count: 19,
   perRow: 4,
@@ -37,12 +37,12 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   prev: document.getElementById('prev'), // Previous button element. Default: null
   next: document.getElementById('next'), // Next button element. Default: null
   keys: true,         // Rotate image on arrow keys. Default: true
-  draggable: true,    // Rotate image by draging. Default: true
+  draggable: true,    // Rotate image by dragging. Default: true
   swipeable: true,    // Rotate image by swiping on mobile screens. Default: true
   dragTolerance: 10,  // Rotation speed when dragging. Default: 10
   swipeTolerance: 10, // Rotation speed when swiping. Default: 10
 
-  // Misc
+  // Rotation settings
   speed: 100,     // Rotation speed during 'play' mode. Default: 10
   inverted: false // Inverts rotation direction
 }
@@ -50,14 +50,36 @@ var threesixty = new ThreeSixty(document.getElementById('threesixty'), {
 
 ### Methods
 
+Single frame rotation:
 ```js
-threesixty.next(); // Rotate image forward
-threesixty.prev(); // Rotate image backward
-threesixty.goto(int index); // Turn to image (0 < index < options.count)
+threesixty.next(); 
+threesixty.prev(); 
+```
 
-threesixty.play(boolean reversed); // Auto-rotate image
-threesixty.stop(); // Stop auto-rotate
-threesixty.destroy(); // Clean up registred events
+Focus *n-th* frame:
+```js
+threesixty.goto(index);
+
+threesixty.goto(0); // Reset position
+threesixty.goto(1); // Focus 1st frame
+threesixty.goto(-1); // Focus last frame
+```
+
+Image rotation:
+```js
+// Start rotation
+threesixty.play();
+
+// Rotate in oposite direction
+threesixty.play(true);
+
+// Stop rotation
+threesixty.stop();
+```
+
+Clean up registered events:
+```js
+threesixty.destroy();
 ```
 
 ### Licence
