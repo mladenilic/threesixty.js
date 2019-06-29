@@ -1,5 +1,8 @@
 class ThreeSixty {
     #index = 0;
+    #dragOrigin = null;
+    #loopTimeoutId = null;
+    #looping = false;
 
     constructor(container, options) {
         this.container = container;
@@ -26,16 +29,11 @@ class ThreeSixty {
             this.options.count = this.options.image.length;
         }
 
-        this.loopTimeoutId = null;
-        this.looping = false;
-
-        this.dragOrigin = null;
-
         this.eventHandlers = {
             container: {
-                mousedown: (e) => this.dragOrigin = e.pageX,
-                touchstart: (e) => this.dragOrigin = e.touches[0].clientX,
-                touchend: () => this.dragOrigin = null,
+                mousedown: (e) => this.#dragOrigin = e.pageX,
+                touchstart: (e) => this.#dragOrigin = e.touches[0].clientX,
+                touchend: () => this.#dragOrigin = null,
             },
             prev: {
                 mousedown: (e) => {
@@ -66,19 +64,19 @@ class ThreeSixty {
                 }
             },
             global: {
-                mouseup: () => this.dragOrigin = null,
+                mouseup: () => this.#dragOrigin = null,
                 mousemove: (e) => {
-                    if (this.dragOrigin && Math.abs(this.dragOrigin - e.pageX) > this.options.dragTolerance) {
+                    if (this.#dragOrigin && Math.abs(this.#dragOrigin - e.pageX) > this.options.dragTolerance) {
                         this.stop();
-                        this.dragOrigin > e.pageX ? this.prev() : this.next();
-                        this.dragOrigin = e.pageX;
+                        this.#dragOrigin > e.pageX ? this.prev() : this.next();
+                        this.#dragOrigin = e.pageX;
                     }
                 },
                 touchmove: (e) => {
-                    if (this.dragOrigin && Math.abs(this.dragOrigin - e.touches[0].clientX) > this.options.swipeTolerance) {
+                    if (this.#dragOrigin && Math.abs(this.#dragOrigin - e.touches[0].clientX) > this.options.swipeTolerance) {
                         this.stop();
-                        this.dragOrigin > e.touches[0].clientX ? this.prev() : this.next();
-                        this.dragOrigin = e.touches[0].clientX;
+                        this.#dragOrigin > e.touches[0].clientX ? this.prev() : this.next();
+                        this.#dragOrigin = e.touches[0].clientX;
                     }
                 },
                 keydown: (e) => {
@@ -162,27 +160,27 @@ class ThreeSixty {
     loop(reversed) {
         reversed ? this.prev() : this.next();
 
-        this.loopTimeoutId = global.setTimeout(() => {
+        this.#loopTimeoutId = global.setTimeout(() => {
             this.loop(reversed);
         }, this.options.speed);
     }
 
     play (reversed) {
-        if (this.looping) {
+        if (this.#looping) {
             return;
         }
 
         this.loop(reversed);
-        this.looping = true;
+        this.#looping = true;
     }
 
     stop () {
-        if (!this.looping) {
+        if (!this.#looping) {
             return;
         }
 
-        global.clearTimeout(this.loopTimeoutId);
-        this.looping = false;
+        global.clearTimeout(this.#loopTimeoutId);
+        this.#looping = false;
     }
 
     update () {
