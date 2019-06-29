@@ -7,7 +7,7 @@
         "name": "Mladen Ilic"
     },
     "scripts": {
-        "build": "webpack",
+        "build": "webpack"
     },
     "main": "src/threesixty.js",
     "devDependencies": {
