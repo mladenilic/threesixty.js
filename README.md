@@ -19,13 +19,17 @@ const threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   prev: document.getElementById('prev'),
   next: document.getElementById('next')
 });
+
+threesixty.play();
 ```
 ### Options
 
 ```js
 {
-  // Mandatory options
-  image: 'images/example.jpg', // Path to 360 image sprite
+  // Source image url
+  image: 'images/example.jpg', // Also supports passing an array of images
+
+  // Sprite options (If array of images are provided, these options are ignored)
   count: 30,                   // Total number of images. Default: 0
   perRow: 5,                   // Number of images per row. Default: 0
 
@@ -47,6 +51,22 @@ const threesixty = new ThreeSixty(document.getElementById('threesixty'), {
   inverted: false // Inverts rotation direction
 }
 ```
+
+### Array of images
+As an alternative to sprite image, ThreeSixty also supports using array of images:
+```js
+new ThreeSixty(document.getElementById('threesixty'), {
+  image: [
+    'images/example-1.jpeg',
+    'images/example-2.jpeg',
+    'images/example-3.jpeg',
+    ...
+  ],
+
+  ...
+})
+```
+In this case options `count` and `perRow` are ignored.
 
 ### Methods
 
