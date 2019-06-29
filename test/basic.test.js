@@ -16,6 +16,8 @@ describe('Basic Features', () => {
   it('should set container properties', () => {
     expect(this.container.style.backgroundImage).to.be.equal('url(https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg)');
     expect(this.container.style.backgroundSize).to.be.equal('400%');
+    expect(this.container.style.backgroundPositionX).to.be.equal('0px');
+    expect(this.container.style.backgroundPositionY).to.be.equal('0px');
   });
 
   it('should be in sprite mode when single image is provided', () => {
@@ -47,5 +49,14 @@ describe('Basic Features', () => {
     this.threesixty.stop();
 
     expect(this.threesixty.looping).to.be.equal(false);
+  });
+
+  it('should clean up container properties after destroy', () => {
+    this.threesixty.destroy();
+
+    expect(this.container.style.backgroundImage).to.be.equal('');
+    expect(this.container.style.backgroundSize).to.be.equal('');
+    expect(this.container.style.backgroundPositionX).to.be.equal('');
+    expect(this.container.style.backgroundPositionY).to.be.equal('');
   });
 });
