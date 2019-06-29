@@ -18,6 +18,12 @@ class ThreeSixty {
             inverted: false
         }, options);
 
+        this.sprite = !Array.isArray(this.options.image);
+
+        if (!this.sprite) {
+            this.options.count = this.options.image.length;
+        }
+
         this.index = 0;
 
         this.loopTimeoutId = null;
@@ -95,9 +101,13 @@ class ThreeSixty {
     initContainer() {
         this.container.style.width = this.options.width + 'px';
         this.container.style.height = this.options.height + 'px';
-        this.container.style.backgroundImage = `url("${this.options.image}")`;
-        this.container.style.backgroundPosition = '0 0';
-        this.container.style.backgroundSize = (this.options.perRow * 100) + '%';
+
+        if (this.sprite) {
+            this.container.style.backgroundImage = `url("${this.options.image}")`;
+            this.container.style.backgroundSize = (this.options.perRow * 100) + '%';
+        }
+
+        this.update();
     }
 
     initEvents() {
@@ -172,8 +182,12 @@ class ThreeSixty {
     }
 
     update () {
-        this.container.style.backgroundPositionX = -(this.index % this.options.perRow) * this.options.width + 'px';
-        this.container.style.backgroundPositionY = -Math.floor(this.index / this.options.perRow) * this.options.height + 'px';
+        if (this.sprite) {
+            this.container.style.backgroundPositionX = -(this.index % this.options.perRow) * this.options.width + 'px';
+            this.container.style.backgroundPositionY = -Math.floor(this.index / this.options.perRow) * this.options.height + 'px';
+        } else {
+            this.container.style.backgroundImage = `url("${this.options.image[this.index]}")`;
+        }
     }
 
     destroy() {
