@@ -224,7 +224,8 @@ class ThreeSixty {
         this.container.style.width = '';
         this.container.style.height = '';
         this.container.style.backgroundImage = '';
-        this.container.style.backgroundPosition = '';
+        this.container.style.backgroundPositionX = '';
+        this.container.style.backgroundPositionY = '';
         this.container.style.backgroundSize = '';
     }
 }
