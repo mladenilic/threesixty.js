@@ -1,36 +1,36 @@
 {
-    "name": "@mladenilic/threesixty.js",
-    "version": "1.2.0",
-    "title": "ThreeSixty.js",
-    "description": "360 product image view library",
-    "author": {
-      "name": "Mladen Ilic"
-    },
-    "scripts": {
-      "build": "webpack",
-      "test": "mocha --require test/setup.js test/**/*.test.js"
-    },
-    "main": "src/threesixty.js",
-    "devDependencies": {
-      "@babel/core": "7.0.x",
-      "@babel/plugin-proposal-class-properties": "^7.4.4",
-      "@babel/preset-env": "7.0.x",
-      "babel-loader": "8.0.x",
-      "chai": "^4.2.0",
-      "jsdom": "^15.1.1",
-      "mocha": "^6.1.4",
-      "webpack": "4.19.x",
-      "webpack-cli": "3.1.x"
-    },
-    "keywords": [
-      "360",
-      "image",
-      "product"
-    ],
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/mladenilic/threesixty"
-    },
-    "homepage": "https://github.com/mladenilic/threesixty",
-    "license": "MIT"
+  "name": "@mladenilic/threesixty.js",
+  "version": "1.2.1",
+  "title": "ThreeSixty.js",
+  "description": "360 product image view library",
+  "author": {
+    "name": "Mladen Ilic"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "mocha --require test/setup.js test/**/*.test.js"
+  },
+  "main": "src/threesixty.js",
+  "devDependencies": {
+    "@babel/core": "7.0.x",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "7.0.x",
+    "babel-loader": "8.0.x",
+    "chai": "^4.2.0",
+    "jsdom": "^15.1.1",
+    "mocha": "^6.1.4",
+    "webpack": "4.19.x",
+    "webpack-cli": "3.1.x"
+  },
+  "keywords": [
+    "360",
+    "image",
+    "product"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mladenilic/threesixty"
+  },
+  "homepage": "https://github.com/mladenilic/threesixty",
+  "license": "MIT"
 }
