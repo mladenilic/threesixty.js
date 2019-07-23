@@ -3,6 +3,7 @@
 [![CircleCI](https://circleci.com/gh/mladenilic/threesixty.svg?style=svg)](https://circleci.com/gh/mladenilic/threesixty)
 
 Turn image sprite into 360 degree image.
+Generate sprite at [Video To 360 Convertor](http://videoto360convertor.com/)
 
 ![sample.gif](https://s3.eu-central-1.amazonaws.com/threesixty.js/sample.gif)
 
