@@ -35,6 +35,8 @@ class ThreeSixty {
       this.#options.count = this.#options.image.length;
     }
 
+    Object.freeze(this.#options);
+
     this.#events = new Events(this, this.#options);
 
     this._windowResizeListener = this._windowResizeListener.bind(this);
