@@ -102,7 +102,7 @@ class ThreeSixty {
     this.container.style.backgroundSize = '';
   }
 
-   _loop(reversed) {
+  _loop(reversed) {
     reversed ? this.prev() : this.next();
 
     this.#loopTimeoutId = global.setTimeout(() => {
@@ -119,13 +119,20 @@ class ThreeSixty {
     }
   }
 
+  calculateBackgroundSize() {
+    const x = (this.#options.perRow * 100) + '%';
+    // Safari calculates the Y wrong (when sprite is very long) so it needs to be set explicitly
+    const y = (this.#options.height * this.#options.count / this.#options.perRow) + 'px';
+    return x + ' ' + y;
+  }
+
   _initContainer() {
     this.container.style.width = this.#options.width + 'px';
     this.container.style.height = this.#options.height + 'px';
 
     if (this.sprite) {
       this.container.style.backgroundImage = `url("${this.#options.image}")`;
-      this.container.style.backgroundSize = (this.#options.perRow * 100) + '%';
+      this.container.style.backgroundSize = this.calculateBackgroundSize();
     }
 
     this._update();
