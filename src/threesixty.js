@@ -140,8 +140,16 @@ class ThreeSixty {
     }
   }
 
+  _calculateBackgroundSize() {
+    const x = (this.#options.perRow * 100) + '%';
+    // Safari calculates the Y wrong (when sprite is very long) so it needs to be set explicitly
+    const y = (this.containerHeight * this.#options.count / this.#options.perRow) + 'px';
+    return x + ' ' + y;
+  }
+
   _windowResizeListener() {
     this.container.style.height = this.containerHeight;
+    this.container.style.backgroundSize = this._calculateBackgroundSize();
     this._update()
   }
 
@@ -153,7 +161,7 @@ class ThreeSixty {
 
     if (this.sprite) {
       this.container.style.backgroundImage = `url("${this.#options.image}")`;
-      this.container.style.backgroundSize = (this.#options.perRow * 100) + '%';
+      this.container.style.backgroundSize = this._calculateBackgroundSize();
     }
 
     if (this.isResponsive) {
