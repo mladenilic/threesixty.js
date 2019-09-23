@@ -119,16 +119,29 @@ class ThreeSixty {
     }
   }
 
+  _calculateBackgroundSize() {
+    const cols = this.#options.perRow;
+    const rows = Math.ceil(this.#options.count / this.#options.perRow);
+    const x = (cols * 100) + '%';
+    // Safari calculates the Y wrong (when sprite is very long) so it needs to be set explicitly
+    // in pixels. Setting it in percent also works bad in Safari
+    const y = (rows * this.containerHeight) + 'px';
+    return x + ' ' + y;
+  }
+
   _initContainer() {
-    this.container.style.width = this.#options.width + 'px';
-    this.container.style.height = this.#options.height + 'px';
+    if (!this.isResponsive) {
+      this.container.style.width = this.containerWidth + 'px';
+    }
+    this.container.style.height = this.containerHeight + 'px';
 
     if (this.sprite) {
       this.container.style.backgroundImage = `url("${this.#options.image}")`;
+      this.container.style.backgroundSize = this._calculateBackgroundSize();
+    }
 
-      const cols = this.#options.perRow;
-      const rows = Math.ceil(this.#options.count / this.#options.perRow);
-      this.container.style.backgroundSize = (cols * 100) + '% ' + (rows * 100) + '%';
+    if (this.isResponsive) {
+      window.addEventListener('resize', this._windowResizeListener);
     }
 
     this._update();
