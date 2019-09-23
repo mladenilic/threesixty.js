@@ -141,7 +141,7 @@ class ThreeSixty {
   }
 
   _windowResizeListener() {
-    this.container.style.height = this.containerHeight;
+    this.container.style.height = this.containerHeight + 'px';
     this._update()
   }
 
