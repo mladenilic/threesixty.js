@@ -16,6 +16,7 @@ class ThreeSixty {
     this.#options = Object.assign({
       width: 300,
       height: 300,
+      aspectRatio: 0,
       count: 0,
       perRow: 0,
       speed: 100,
@@ -38,7 +39,23 @@ class ThreeSixty {
 
     this.#events = new Events(this, this.#options);
 
+    this._windowResizeListener = this._windowResizeListener.bind(this);
+
     this._initContainer();
+  }
+
+  get isResponsive() {
+    return this.#options.aspectRatio > 0;
+  }
+
+  get containerWidth() {
+    return this.isResponsive ? this.container.clientWidth : this.#options.width;
+  }
+
+  get containerHeight() {
+    return this.isResponsive
+      ? this.container.clientWidth * this.#options.aspectRatio
+      : this.#options.height;
   }
 
   get index() {
@@ -100,9 +117,13 @@ class ThreeSixty {
     this.container.style.backgroundPositionX = '';
     this.container.style.backgroundPositionY = '';
     this.container.style.backgroundSize = '';
+
+    if (this.isResponsive) {
+      window.removeEventListener('resize', this._windowResizeListener);
+    }
   }
 
-   _loop(reversed) {
+  _loop(reversed) {
     reversed ? this.prev() : this.next();
 
     this.#loopTimeoutId = global.setTimeout(() => {
@@ -112,20 +133,34 @@ class ThreeSixty {
 
   _update () {
     if (this.sprite) {
-      this.container.style.backgroundPositionX = -(this.#index % this.#options.perRow) * this.#options.width + 'px';
-      this.container.style.backgroundPositionY = -Math.floor(this.#index / this.#options.perRow) * this.#options.height + 'px';
+      this.container.style.backgroundPositionX = -(this.#index % this.#options.perRow) * this.containerWidth + 'px';
+      this.container.style.backgroundPositionY = -Math.floor(this.#index / this.#options.perRow) * this.containerHeight + 'px';
     } else {
       this.container.style.backgroundImage = `url("${this.#options.image[this.#index]}")`;
     }
   }
 
+  _windowResizeListener() {
+    this.container.style.height = this.containerHeight + 'px';
+    this._update()
+  }
+
   _initContainer() {
-    this.container.style.width = this.#options.width + 'px';
-    this.container.style.height = this.#options.height + 'px';
+    if (!this.isResponsive) {
+      this.container.style.width = this.containerWidth + 'px';
+    }
+    this.container.style.height = this.containerHeight + 'px';
 
     if (this.sprite) {
       this.container.style.backgroundImage = `url("${this.#options.image}")`;
-      this.container.style.backgroundSize = (this.#options.perRow * 100) + '%';
+
+      const cols = this.#options.perRow;
+      const rows = Math.ceil(this.#options.count / this.#options.perRow);
+      this.container.style.backgroundSize = (cols * 100) + '% ' + (rows * 100) + '%';
+    }
+
+    if (this.isResponsive) {
+      window.addEventListener('resize', this._windowResizeListener);
     }
 
     this._update();
