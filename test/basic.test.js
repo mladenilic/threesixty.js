@@ -16,7 +16,7 @@ describe('Basic Features', () => {
 
   it('should set container properties', () => {
     expect(this.container.style.backgroundImage).to.be.equal(`url(${this.image})`);
-    expect(this.container.style.backgroundSize).to.be.equal('400%');
+    expect(this.container.style.backgroundSize).to.be.equal('400% 800%');
     expect(this.container.style.backgroundPositionX).to.be.equal('0px');
     expect(this.container.style.backgroundPositionY).to.be.equal('0px');
   });
