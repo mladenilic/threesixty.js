@@ -1,6 +1,6 @@
 {
   "name": "@mladenilic/threesixty.js",
-  "version": "1.2.2",
+  "version": "1.2.1",
   "title": "ThreeSixty.js",
   "description": "360 product image view library",
   "author": {
@@ -12,14 +12,14 @@
   },
   "main": "src/threesixty.js",
   "devDependencies": {
-    "@babel/core": "7.5.x",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "7.5.x",
+    "@babel/core": "7.7.x",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "7.7.x",
     "babel-loader": "8.0.x",
     "chai": "^4.2.0",
-    "jsdom": "^15.1.1",
-    "mocha": "^6.2.0",
-    "webpack": "4.39.x",
+    "jsdom": "^15.2.1",
+    "mocha": "^7.0.0",
+    "webpack": "4.41.x",
     "webpack-cli": "3.3.x"
   },
   "keywords": [
