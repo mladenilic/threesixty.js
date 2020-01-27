@@ -1,6 +1,6 @@
 # ThreeSixty.js
 [![npm version](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js.svg)](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js)
-[![CircleCI](https://circleci.com/gh/mladenilic/threesixty.svg?style=svg)](https://circleci.com/gh/mladenilic/threesixty)
+[![CircleCI](https://circleci.com/gh/mladenilic/threesixty.js.svg?style=svg)](https://circleci.com/gh/mladenilic/threesixty.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4f32024bb20147b87dbf/maintainability)](https://codeclimate.com/github/mladenilic/threesixty/maintainability)
 
 Turn image sprite into 360 degree image.
