@@ -1,10 +1,10 @@
 {
-  "name": "@mladenilic/threesixty.js",
-  "version": "1.2.4",
+  "name": "ashivliving/threesixty.js",
+  "version": "0.0.1",
   "title": "ThreeSixty.js",
   "description": "360 product image view library",
   "author": {
-    "name": "Mladen Ilic"
+    "name": "Ashiv Gupta"
   },
   "scripts": {
     "build": "webpack",
@@ -30,12 +30,13 @@
   "keywords": [
     "360",
     "image",
-    "product"
+    "product",
+    "vanilla JS"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mladenilic/threesixty"
+    "url": "https://github.com/ashivliving/threesixty"
   },
-  "homepage": "https://github.com/mladenilic/threesixty",
+  "homepage": "https://github.com/ashivliving/threesixty",
   "license": "MIT"
 }
