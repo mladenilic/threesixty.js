@@ -2,7 +2,7 @@
 ### Install
 ThreeSixty is available as NPM package
 ```
-npm i @mladenilic/threesixty.js
+npm i @ashivliving/threesixty-js
 ```
 
 You can also use it via a CDN
