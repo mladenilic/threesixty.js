@@ -1,13 +1,3 @@
-# ThreeSixty.js
-[![npm version](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js.svg)](https://badge.fury.io/js/%40mladenilic%2Fthreesixty.js)
-[![CircleCI](https://circleci.com/gh/mladenilic/threesixty.js.svg?style=svg)](https://circleci.com/gh/mladenilic/threesixty.js)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4f32024bb20147b87dbf/maintainability)](https://codeclimate.com/github/mladenilic/threesixty/maintainability)
-
-Turn image sprite into 360 degree image.
-
-![sample.gif](https://s3.eu-central-1.amazonaws.com/threesixty.js/sample.gif)
-
-View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
 ### Install
 ThreeSixty is available as NPM package
@@ -64,7 +54,8 @@ threesixty.play();
 
   // Rotation settings
   speed: 100,     // Rotation speed during 'play' mode. Default: 10
-  inverted: false // Inverts rotation direction
+  inverted: false // Inverts rotation direction,
+  containerName: 'reactThreesixtyContainer' //Three sixty container name
 }
 ```
 

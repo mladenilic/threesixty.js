@@ -8,7 +8,6 @@ class ThreeSixty {
   #looping = false;
 
   #events = null;
-  #sprite = false;
 
   constructor(container, options) {
     this.container = container;
@@ -25,15 +24,12 @@ class ThreeSixty {
       draggable: true,
       swipeable: true,
       keys: true,
-      inverted: false
+      inverted: false,
+      containerName: 'reactThreesixtyContainer'
     }, options);
 
     this.#options.swipeTarget = this.#options.swipeTarget || this.container;
-
-    this.#sprite = !Array.isArray(this.#options.image);
-    if (!this.sprite) {
-      this.#options.count = this.#options.image.length;
-    }
+    this.#options.count = this.#options.image.length;
 
     Object.freeze(this.#options);
 
@@ -66,8 +62,9 @@ class ThreeSixty {
     return this.#looping;
   }
 
-  get sprite() {
-    return this.#sprite;
+  get prevIndex() {
+    let prev_index = this.#options.inverted ? this.#index + 1 : this.#index - 1;
+    return (this.#options.count + prev_index) % this.#options.count;
   }
 
   next() {
@@ -79,6 +76,11 @@ class ThreeSixty {
   }
 
   goto(index) {
+    let prev_index = this.#index;
+    let prev_image = document.querySelector(`#${this.#options.containerName} > .reactThreesixtyImage_${prev_index}`);
+    if(prev_image) {
+      prev_image.style.display = 'none';
+    }
     this.#index = (this.#options.count + index) % this.#options.count;
 
     this._update();
@@ -113,10 +115,6 @@ class ThreeSixty {
 
     this.container.style.width = '';
     this.container.style.height = '';
-    this.container.style.backgroundImage = '';
-    this.container.style.backgroundPositionX = '';
-    this.container.style.backgroundPositionY = '';
-    this.container.style.backgroundSize = '';
 
     if (this.isResponsive) {
       window.removeEventListener('resize', this._windowResizeListener);
@@ -132,12 +130,21 @@ class ThreeSixty {
   }
 
   _update () {
-    if (this.sprite) {
-      this.container.style.backgroundPositionX = -(this.#index % this.#options.perRow) * this.containerWidth + 'px';
-      this.container.style.backgroundPositionY = -Math.floor(this.#index / this.#options.perRow) * this.containerHeight + 'px';
-    } else {
-      this.container.style.backgroundImage = `url("${this.#options.image[this.#index]}")`;
+    let new_image = document.querySelector(`#${this.#options.containerName} > .reactThreesixtyImage_${this.#index}`)
+    if(new_image) {
+      new_image.style.display = 'initial';
     }
+  }
+
+  _initializeImage () {
+    this.container.setAttribute('id', `${this.#options.containerName}`)
+    this.container.setAttribute('class', `${this.#options.containerName}`)
+    this.#options.image.map((image, index) => {
+      let elem = document.createElement('div');
+      elem.setAttribute('style', `display:none;position:absolute;width: 100%;height: 100%;background-position: center;background-size: contain;background-repeat: no-repeat;background-image:url(${image})`)
+      elem.setAttribute('class', `reactThreesixtyImage_${index}`)
+      this.container.appendChild(elem)
+    })
   }
 
   _windowResizeListener() {
@@ -151,19 +158,11 @@ class ThreeSixty {
     }
     this.container.style.height = this.containerHeight + 'px';
 
-    if (this.sprite) {
-      this.container.style.backgroundImage = `url("${this.#options.image}")`;
-
-      const cols = this.#options.perRow;
-      const rows = Math.ceil(this.#options.count / this.#options.perRow);
-      this.container.style.backgroundSize = (cols * 100) + '% ' + (rows * 100) + '%';
-    }
-
     if (this.isResponsive) {
       window.addEventListener('resize', this._windowResizeListener);
     }
 
-    this._update();
+    this._initializeImage();
   }
 }
 
