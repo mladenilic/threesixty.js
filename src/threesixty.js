@@ -145,7 +145,7 @@ class ThreeSixty {
     this.container.innerHTML = "";
     this.#options.image.map((image, index) => {
       let elem = document.createElement('div');
-      elem.setAttribute('style', `display:${index === this.#index ? 'initial' : 'none'};position:absolute;width: 100%;height: 100%;background-position: center;background-size: contain;background-repeat: no-repeat;background-image:url(${image})`)
+      elem.setAttribute('style', `display:${index === this.#index ? 'initial' : 'none'};position:absolute;width:100%;height: 100%;left:0px;top:0px;background-position:center;background-size:contain;background-repeat:no-repeat;background-image:url(${image})`)
       elem.setAttribute('class', `reactThreesixtyImage_${index}`)
       this.container.appendChild(elem)
     })
