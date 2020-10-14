@@ -35,8 +35,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashivliving/threesixty"
+    "url": "https://github.com/ashivliving/threesixty.js"
   },
-  "homepage": "https://github.com/ashivliving/threesixty",
+  "homepage": "https://github.com/ashivliving/threesixty.js",
   "license": "MIT"
 }

@@ -130,8 +130,10 @@ class ThreeSixty {
   }
 
   _update () {
-    let new_image = document.querySelector(`#${this.#options.containerName} > .reactThreesixtyImage_${this.#index}`)
+    let new_image = document.querySelector(`#${this.#options.containerName} > .reactThreesixtyImage_${this.#index}`);
     if(new_image) {
+      var imageChanged = new CustomEvent(`${this.#options.containerName}_image_changed`, {detail : {"image_index" : this.#index}});
+      document.dispatchEvent(imageChanged);
       new_image.style.display = 'initial';
     }
   }
