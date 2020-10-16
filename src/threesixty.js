@@ -27,7 +27,7 @@ class ThreeSixty {
       inverted: false,
       containerName: 'reactThreesixtyContainer'
     }, options);
-
+    this.#index = options.startIndex ? options.startIndex : 0;
     this.#options.swipeTarget = this.#options.swipeTarget || this.container;
     this.#options.count = this.#options.image.length;
 
@@ -136,6 +136,14 @@ class ThreeSixty {
       document.dispatchEvent(imageChanged);
       new_image.style.display = 'initial';
     }
+  }
+
+  _updateImage (updatedImage) {
+    this.#options = {
+      ...this.#options,
+      image : updatedImage
+    };
+    this._initializeImage();
   }
 
   _initializeImage () {
