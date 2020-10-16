@@ -41,6 +41,7 @@ threesixty.play();
   // Width & Height
   width: 300,  // Image width. Default 300
   height: 300, // Image height. Default 300
+  startIndex: 0, // Start Index. Default 0
 
   // Navigation
   prev: document.getElementById('prev'), // Previous button element. Default: null
