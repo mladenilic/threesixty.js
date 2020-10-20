@@ -6,6 +6,7 @@ class ThreeSixty {
 
   #loopTimeoutId = null;
   #looping = false;
+  #allowScroll = false;
 
   #events = null;
 
@@ -68,11 +69,15 @@ class ThreeSixty {
   }
 
   next() {
-    this.goto(this.#options.inverted ? this.#index - 1 : this.#index + 1);
+    if(this.#allowScroll) {
+      this.goto(this.#options.inverted ? this.#index - 1 : this.#index + 1);
+    }
   }
 
   prev() {
-    this.goto(this.#options.inverted ? this.#index + 1 : this.#index - 1);
+    if(this.#allowScroll) {
+      this.goto(this.#options.inverted ? this.#index + 1 : this.#index - 1);
+    }
   }
 
   goto(index) {
@@ -136,6 +141,10 @@ class ThreeSixty {
       document.dispatchEvent(imageChanged);
       new_image.style.display = 'initial';
     }
+  }
+
+  _allowScroll () {
+    this.#allowScroll = true;
   }
 
   _updateImage (updatedImage) {
