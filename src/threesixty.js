@@ -84,7 +84,7 @@ class ThreeSixty {
     let prev_index = this.#index;
     let prev_image = document.querySelector(`#${this.#options.containerName} > .reactThreesixtyImage_${prev_index}`);
     if(prev_image) {
-      prev_image.style.display = 'none';
+      prev_image.style.visibility = 'hidden';
     }
     this.#index = (this.#options.count + index) % this.#options.count;
 
@@ -139,7 +139,7 @@ class ThreeSixty {
     if(new_image) {
       var imageChanged = new CustomEvent(`${this.#options.containerName}_image_changed`, {detail : {"image_index" : this.#index}});
       document.dispatchEvent(imageChanged);
-      new_image.style.display = 'initial';
+      new_image.style.visibility = 'visible';
     }
   }
 
@@ -162,7 +162,7 @@ class ThreeSixty {
     this.container.innerHTML = "";
     this.#options.image.map((image, index) => {
       let elem = document.createElement('div');
-      elem.setAttribute('style', `display:${index === this.#index ? 'initial' : 'none'};position:absolute;width:100%;height: 100%;left:0px;top:0px;background-position:center;background-size:contain;background-repeat:no-repeat;background-image:url(${image})`)
+      elem.setAttribute('style', `visibility:${index === this.#index ? 'visible' : 'hidden'};position:absolute;width:100%;height: 100%;left:0px;top:0px;background-position:center;background-size:contain;background-repeat:no-repeat;background-image:url(${image})`)
       elem.setAttribute('class', `reactThreesixtyImage_${index}`)
       this.container.appendChild(elem)
     })
