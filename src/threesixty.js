@@ -158,7 +158,8 @@ class ThreeSixty {
   _initializeImage () {
     this.container.setAttribute('id', `${this.#options.containerName}`)
     this.container.setAttribute('class', `${this.#options.containerName}`)
-    this.container.style.height = "100%"
+    this.container.style.height = "100%";
+    this.container.style.width = "100%";
     this.container.innerHTML = "";
     this.#options.image.map((image, index) => {
       let elem = document.createElement('div');
