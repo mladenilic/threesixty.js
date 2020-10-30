@@ -143,6 +143,10 @@ class ThreeSixty {
     }
   }
 
+  _stopScroll () {
+    this.#allowScroll = false;
+  }
+
   _allowScroll () {
     this.#allowScroll = true;
   }
