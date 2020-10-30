@@ -42,6 +42,9 @@ class Events {
         }
       },
       global: {
+        click: () => {
+          threesixty.click();
+        },
         mouseup: () => this.#dragOrigin = null,
         mousemove: (e) => {
           if (this.#dragOrigin && Math.abs(this.#dragOrigin - e.pageX) > this.#options.dragTolerance) {
@@ -98,6 +101,7 @@ class Events {
   }
 
   _initEvents() {
+    global.addEventListener('click', this.#eventHandlers.global.click)
     if (this.#options.draggable) {
       this.#options.swipeTarget.addEventListener('mousedown', this.#eventHandlers.container.mousedown);
       global.addEventListener('mouseup', this.#eventHandlers.global.mouseup);

@@ -109,6 +109,11 @@ class ThreeSixty {
     this.#looping = false;
   }
 
+  click () {
+    var imageClicked = new CustomEvent(`${this.#options.containerName}_image_clicked`, {detail : {"image_index" : this.#index}});
+    document.dispatchEvent(imageClicked);
+  }
+
   toggle(reversed) {
     this.looping ? this.stop() : this.play(reversed);
   }
