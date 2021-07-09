@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "mocha --require test/setup.js test/**/*.test.js"
+    "test": "mocha --require test/setup.js test/**/*.test.js",
+    "publish": "npm run build && npm publish"
   },
   "main": "dist/threesixty.js",
   "files": [
