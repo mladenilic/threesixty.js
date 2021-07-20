@@ -169,14 +169,22 @@ class ThreeSixty {
     this.container.setAttribute('class', `${this.#options.containerName}`)
     this.container.style.height = "100%";
     this.container.style.width = "100%";
-    this.container.innerHTML = "";
+    const extraElement = this.container.querySelector('.extra_threesixty');
+    this.container.innerHTML = '';
+
+    if (extraElement) {
+      this.container.appendChild(extraElement);
+      if (typeof this.#options.handleRenderExraElment === 'function') { 
+        this.#options.handleRenderExraElment();
+      }
+    }
     this.#options.image.map((image, index) => {
       let elem = document.createElement('img');
       elem.setAttribute('style', `visibility:${index === this.#index ? 'visible' : 'hidden'};position:${!index ? 'relative' : 'absolute'};transform:${(!this.#options.isMobile) ? 'translateX(-50%)' : 'initial'};max-width:100%;max-height:100%;left:${!this.#options.isMobile ? '50%' : '0px'};width:${this.#options.isMobile ? '100%' : 'auto'};height:${this.#options.isMobile ? 'auto' : '100%'};top:0px;pointer-events: none;`)
       elem.setAttribute('src', `${image}`)
       elem.setAttribute('class', `reactThreesixtyImage_${index}`)
       this.container.appendChild(elem)
-    })
+    });
   }
 
   _windowResizeListener() {
