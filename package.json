@@ -1,6 +1,6 @@
 {
   "name": "@ashivliving/threesixty-js",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "title": "ThreeSixty.js",
   "description": "360 product image view library",
   "author": {
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "mocha --require test/setup.js test/**/*.test.js"
+    "test": "mocha --require test/setup.js test/**/*.test.js",
+    "publish": "npm run build && npm publish"
   },
   "main": "dist/threesixty.js",
   "files": [
