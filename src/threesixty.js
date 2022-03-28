@@ -6,6 +6,7 @@ class ThreeSixty {
 
   #loopTimeoutId = null;
   #looping = false;
+  #maxloops = null;
 
   #events = null;
   #sprite = false;
@@ -42,6 +43,8 @@ class ThreeSixty {
     this._windowResizeListener = this._windowResizeListener.bind(this);
 
     this._initContainer();
+
+    this.nloops = 0;
   }
 
   get isResponsive() {
@@ -84,13 +87,15 @@ class ThreeSixty {
     this._update();
   }
 
-  play (reversed) {
+  play (reversed, maxloops) {
     if (this.looping) {
       return;
     }
 
     this._loop(reversed);
     this.#looping = true;
+    this.#maxloops = maxloops;
+    this.nloops = 0;
   }
 
   stop () {
@@ -100,6 +105,8 @@ class ThreeSixty {
 
     global.clearTimeout(this.#loopTimeoutId);
     this.#looping = false;
+    this.#maxloops = null;
+    this.nloops = 0;
   }
 
   toggle(reversed) {
@@ -125,6 +132,14 @@ class ThreeSixty {
 
   _loop(reversed) {
     reversed ? this.prev() : this.next();
+
+    if(this.#index == 0) {
+      this.nloops += 1;
+      if (this.#maxloops && this.nloops >= this.#maxloops) {
+        this.stop();
+        return;
+      }
+    }
 
     this.#loopTimeoutId = global.setTimeout(() => {
       this._loop(reversed);
