@@ -109,6 +109,9 @@ threesixty.play();
 // Rotate in oposite direction
 threesixty.play(true);
 
+// Rotate only 2 times, then stop automatically
+threesixty.play(false, 2);
+
 // Stop rotation
 threesixty.stop();
 
