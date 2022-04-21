@@ -78,11 +78,11 @@ class Events {
     this.#options.swipeTarget.removeEventListener('touchstart', this.#eventHandlers.container.touchstart);
     this.#options.swipeTarget.removeEventListener('touchend', this.#eventHandlers.container.touchend);
 
-    global.removeEventListener('mouseup', this.#eventHandlers.global.mouseup);
-    global.removeEventListener('mousemove', this.#eventHandlers.global.mousemove);
-    global.removeEventListener('touchmove', this.#eventHandlers.global.touchmove);
-    global.removeEventListener('keydown', this.#eventHandlers.global.keydown);
-    global.removeEventListener('keyup', this.#eventHandlers.global.keyup);
+    window.removeEventListener('mouseup', this.#eventHandlers.global.mouseup);
+    window.removeEventListener('mousemove', this.#eventHandlers.global.mousemove);
+    window.removeEventListener('touchmove', this.#eventHandlers.global.touchmove);
+    window.removeEventListener('keydown', this.#eventHandlers.global.keydown);
+    window.removeEventListener('keyup', this.#eventHandlers.global.keyup);
 
     if (this.#options.prev) {
       this.#options.prev.removeEventListener('mousedown', this.#eventHandlers.prev.mousedown);
@@ -100,19 +100,19 @@ class Events {
   _initEvents() {
     if (this.#options.draggable) {
       this.#options.swipeTarget.addEventListener('mousedown', this.#eventHandlers.container.mousedown);
-      global.addEventListener('mouseup', this.#eventHandlers.global.mouseup);
-      global.addEventListener('mousemove', this.#eventHandlers.global.mousemove);
+      window.addEventListener('mouseup', this.#eventHandlers.global.mouseup);
+      window.addEventListener('mousemove', this.#eventHandlers.global.mousemove);
     }
 
     if (this.#options.swipeable) {
       this.#options.swipeTarget.addEventListener('touchstart', this.#eventHandlers.container.touchstart);
       this.#options.swipeTarget.addEventListener('touchend', this.#eventHandlers.container.touchend);
-      global.addEventListener('touchmove', this.#eventHandlers.global.touchmove);
+      window.addEventListener('touchmove', this.#eventHandlers.global.touchmove);
     }
 
     if (this.#options.keys) {
-      global.addEventListener('keydown', this.#eventHandlers.global.keydown);
-      global.addEventListener('keyup', this.#eventHandlers.global.keyup);
+      window.addEventListener('keydown', this.#eventHandlers.global.keydown);
+      window.addEventListener('keyup', this.#eventHandlers.global.keyup);
     }
 
     if (this.#options.prev) {
