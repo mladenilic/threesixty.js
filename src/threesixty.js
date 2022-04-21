@@ -133,7 +133,7 @@ class ThreeSixty {
   _loop(reversed) {
     reversed ? this.prev() : this.next();
 
-    if(this.#index == 0) {
+    if(this.#index === 0) {
       this.nloops += 1;
       if (this.#maxloops && this.nloops >= this.#maxloops) {
         this.stop();
