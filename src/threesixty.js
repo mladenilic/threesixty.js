@@ -32,11 +32,30 @@ class ThreeSixty {
     this.#options.swipeTarget = this.#options.swipeTarget || this.container;
 
     this.#sprite = !Array.isArray(this.#options.image);
-    if (!this.sprite) {
+    if (this.sprite) {
+      this.img = new Image();
+      this.img.onload = event => {
+        if(!this.#options.perRow) {
+          this.#options.perRow = this.img.naturalWidth / this.#options.width;
+        }
+        this.cols = this.#options.perRow;
+        console.log(this.cols + ' cols');
+        if(this.#options.count) {
+          this.rows = Math.ceil(this.#options.count / this.cols);
+        } else {
+          this.rows = Math.ceil(this.img.naturalHeight / this.#options.height);
+          this.#options.count = this.rows * this.cols;
+        }
+        console.log(this.rows + ' rows');
+        Object.freeze(this.#options);
+      }
+
+      this.img.src = this.#options.image;
+    } else {
       this.#options.count = this.#options.image.length;
+      Object.freeze(this.#options);
     }
 
-    Object.freeze(this.#options);
 
     this.#events = new Events(this, this.#options);
 
@@ -167,11 +186,8 @@ class ThreeSixty {
     this.container.style.height = this.containerHeight + 'px';
 
     if (this.sprite) {
-      this.container.style.backgroundImage = `url("${this.#options.image}")`;
-
-      const cols = this.#options.perRow;
-      const rows = Math.ceil(this.#options.count / this.#options.perRow);
-      this.container.style.backgroundSize = (cols * 100) + '% ' + (rows * 100) + '%';
+      this.container.style.backgroundImage = `url("${this.img.src}")`;
+      this.container.style.backgroundSize = (this.cols * 100) + '% ' + (this.rows * 100) + '%';
     }
 
     if (this.isResponsive) {
