@@ -50,6 +50,11 @@ class Events {
             this.#dragOrigin = e.pageX;
           }
         },
+        selectstart: (e) => {
+          if (this.#dragOrigin) {
+            e.preventDefault();
+          }
+        },
         touchmove: (e) => {
           if (this.#dragOrigin && Math.abs(this.#dragOrigin - e.touches[0].clientX) > this.#options.swipeTolerance) {
             threesixty.stop();
@@ -80,6 +85,7 @@ class Events {
 
     window.removeEventListener('mouseup', this.#eventHandlers.global.mouseup);
     window.removeEventListener('mousemove', this.#eventHandlers.global.mousemove);
+    window.removeEventListener('selectstart', this.#eventHandlers.global.selectstart);
     window.removeEventListener('touchmove', this.#eventHandlers.global.touchmove);
     window.removeEventListener('keydown', this.#eventHandlers.global.keydown);
     window.removeEventListener('keyup', this.#eventHandlers.global.keyup);
@@ -102,6 +108,7 @@ class Events {
       this.#options.swipeTarget.addEventListener('mousedown', this.#eventHandlers.container.mousedown);
       window.addEventListener('mouseup', this.#eventHandlers.global.mouseup);
       window.addEventListener('mousemove', this.#eventHandlers.global.mousemove);
+      window.addEventListener('selectstart', this.#eventHandlers.global.selectstart);
     }
 
     if (this.#options.swipeable) {
