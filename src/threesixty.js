@@ -111,10 +111,17 @@ class ThreeSixty {
       return;
     }
 
-    this._loop(reversed);
     this.#looping = true;
     this.#maxloops = maxloops;
     this.nloops = 0;
+
+    if (this.#options.count) {
+      this._loop(reversed);
+    } else if (this.img.complete) {
+      setTimeout(() => {this._loop(reversed);}, 10);
+    } else {
+      this.img.addEventListener('load', () => {this._loop(reversed);});
+    }
   }
 
   stop () {
