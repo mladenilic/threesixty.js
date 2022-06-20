@@ -35,18 +35,16 @@ class ThreeSixty {
     if (this.sprite) {
       this.img = new Image();
       this.img.onload = event => {
-        if(!this.#options.perRow) {
+        if (!this.#options.perRow) {
           this.#options.perRow = this.img.naturalWidth / this.#options.width;
         }
         this.cols = this.#options.perRow;
-        console.log(this.cols + ' cols');
-        if(this.#options.count) {
+        if (this.#options.count) {
           this.rows = Math.ceil(this.#options.count / this.cols);
         } else {
           this.rows = Math.ceil(this.img.naturalHeight / this.#options.height);
           this.#options.count = this.rows * this.cols;
         }
-        console.log(this.rows + ' rows');
         Object.freeze(this.#options);
       }
 
@@ -159,7 +157,7 @@ class ThreeSixty {
   _loop(reversed) {
     reversed ? this.prev() : this.next();
 
-    if(this.#index === 0) {
+    if (this.#index === 0) {
       this.nloops += 1;
       if (this.#maxloops && this.nloops >= this.#maxloops) {
         this.stop();
