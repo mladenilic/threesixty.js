@@ -34,7 +34,7 @@ class ThreeSixty {
     this.#sprite = !Array.isArray(this.#options.image);
     if (this.sprite) {
       this.img = new Image();
-      this.img.onload = event => {
+      this.img.addEventListener('load', () => {
         if (!this.#options.perRow) {
           this.#options.perRow = this.img.naturalWidth / this.#options.width;
         }
@@ -46,7 +46,7 @@ class ThreeSixty {
           this.#options.count = this.rows * this.cols;
         }
         Object.freeze(this.#options);
-      }
+      });
 
       this.img.src = this.#options.image;
     } else {
