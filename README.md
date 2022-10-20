@@ -10,7 +10,7 @@ Turn image sprite into 360 degree image.
 View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
 ### Install
-ThreeSixty is available as NPM package
+ThreeSixty is available as an NPM package
 ```
 npm i @mladenilic/threesixty.js
 ```
@@ -22,7 +22,7 @@ You can also use it via a CDN
 
 
 ### Dependencies
-No dependacies! Written in plain javascript.
+No dependencies! Written in plain javascript.
 
 ### Example
 
@@ -68,8 +68,12 @@ threesixty.play();
 }
 ```
 
+If a sprite image is used and the options `count` and/or `perRow` values are not given,
+threesixty.js will try to calculate the values based on the image's resolution. If it fails
+because the calculated values are wrong, be sure to specify `count` and `perRow`.
+
 ### Array of images
-As an alternative to sprite image, ThreeSixty also supports using array of images:
+As an alternative to a sprite image, ThreeSixty also supports using an array of images:
 ```js
 new ThreeSixty(document.getElementById('threesixty'), {
   image: [
@@ -82,7 +86,7 @@ new ThreeSixty(document.getElementById('threesixty'), {
   ...
 })
 ```
-In this case options `count` and `perRow` are ignored.
+In this case the options `count` and `perRow` are ignored.
 
 ### Methods
 

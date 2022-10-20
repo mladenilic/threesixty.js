@@ -32,11 +32,28 @@ class ThreeSixty {
     this.#options.swipeTarget = this.#options.swipeTarget || this.container;
 
     this.#sprite = !Array.isArray(this.#options.image);
-    if (!this.sprite) {
+    if (this.sprite) {
+      this.img = new Image();
+      this.img.addEventListener('load', () => {
+        if (!this.#options.perRow) {
+          this.#options.perRow = this.img.naturalWidth / this.#options.width;
+        }
+        this.cols = this.#options.perRow;
+        if (this.#options.count) {
+          this.rows = Math.ceil(this.#options.count / this.cols);
+        } else {
+          this.rows = Math.ceil(this.img.naturalHeight / this.#options.height);
+          this.#options.count = this.rows * this.cols;
+        }
+        Object.freeze(this.#options);
+      });
+
+      this.img.src = this.#options.image;
+    } else {
       this.#options.count = this.#options.image.length;
+      Object.freeze(this.#options);
     }
 
-    Object.freeze(this.#options);
 
     this.#events = new Events(this, this.#options);
 
@@ -92,10 +109,17 @@ class ThreeSixty {
       return;
     }
 
-    this._loop(reversed);
     this.#looping = true;
     this.#maxloops = maxloops;
     this.nloops = 0;
+
+    if (this.#options.count) {
+      this._loop(reversed);
+    } else if (this.img.complete) {
+      setTimeout(() => {this._loop(reversed);}, 10);
+    } else {
+      this.img.addEventListener('load', () => {this._loop(reversed);});
+    }
   }
 
   stop () {
@@ -133,7 +157,7 @@ class ThreeSixty {
   _loop(reversed) {
     reversed ? this.prev() : this.next();
 
-    if(this.#index === 0) {
+    if (this.#index === 0) {
       this.nloops += 1;
       if (this.#maxloops && this.nloops >= this.#maxloops) {
         this.stop();
@@ -167,11 +191,8 @@ class ThreeSixty {
     this.container.style.height = this.containerHeight + 'px';
 
     if (this.sprite) {
-      this.container.style.backgroundImage = `url("${this.#options.image}")`;
-
-      const cols = this.#options.perRow;
-      const rows = Math.ceil(this.#options.count / this.#options.perRow);
-      this.container.style.backgroundSize = (cols * 100) + '% ' + (rows * 100) + '%';
+      this.container.style.backgroundImage = `url("${this.img.src}")`;
+      this.container.style.backgroundSize = (this.cols * 100) + '% ' + (this.rows * 100) + '%';
     }
 
     if (this.isResponsive) {
