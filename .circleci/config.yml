@@ -1,16 +1,14 @@
 version: 2.1
+
+orbs:
+  node: circleci/node@5.0.3
+
 jobs:
-  build:
-    docker:
-      - image: cimg/node:17.8.0
-    steps:
-      - checkout
-      - run: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: 'npm install'
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-      - run: 'npm run test'
+  test:
+    executor:
+      name: node/default
+      tag: '13.14'
+      steps:
+        - checkout
+        - node/install-packages
+        - node/test
