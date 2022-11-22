@@ -7,12 +7,15 @@
     "name": "Mladen Ilic"
   },
   "scripts": {
-    "build": "webpack",
+    "build:dist": "webpack --mode production",
+    "build:lib": "babel src -d lib",
+    "start": "webpack serve --mode development",
     "test": "mocha --require test/setup.js test/**/*.test.js"
   },
-  "main": "dist/threesixty.js",
+  "main": "lib/threesixty.js",
   "files": [
     "src/*",
+    "lib/*",
     "dist/*"
   ],
   "devDependencies": {
@@ -24,7 +27,8 @@
     "jsdom": "^20.0.3",
     "mocha": "^10.1.0",
     "webpack": "5.75.x",
-    "webpack-cli": "5.0.x"
+    "webpack-cli": "5.0.x",
+    "webpack-dev-server": "^4.11.1"
   },
   "keywords": [
     "360",

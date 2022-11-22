@@ -1,15 +1,16 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
   entry: require.resolve('./src/threesixty.js'),
   context: __dirname,
   output: {
-    path: path.resolve(__dirname, './'),
-    filename: 'dist/threesixty.js',
-    libraryExport: 'default',
-    library: 'ThreeSixty',
-    libraryTarget: 'umd'
+    path: path.resolve(__dirname, './dist'),
+    filename: 'threesixty.js',
+    library: {
+      type: 'umd',
+      name: 'ThreeSixty',
+      export: 'default',
+    },
   },
   module: {
     rules: [{
@@ -18,4 +19,8 @@ module.exports = {
       exclude: /node_modules/
     }],
   },
+  devServer: {
+    static: path.resolve(__dirname, './demo'),
+    compress: true
+  }
 };
