@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:12.5.0-stretch
+      - image: cimg/node:17.8.0
     steps:
       - checkout
       - run: 'sudo npm install -g npm@latest'
