@@ -10,19 +10,24 @@ Turn image sprite into 360 degree image.
 View on Codepen - [http://codepen.io/mladenilic/full/zKOpmg/](http://codepen.io/mladenilic/full/zKOpmg/)
 
 ### Install
-ThreeSixty is available as NPM package
+ThreeSixty is available as an ES6 module via NPM package
 ```
 npm i @mladenilic/threesixty.js
 ```
 
-You can also use it via a CDN
+Then you can import it with
+```js
+import ThreeSixty from '@mladenilic/threesixty.js';
+```
+
+Or, you can also use it via a CDN
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@mladenilic/threesixty.js/dist/threesixty.js"></script>
 ```
 
 
 ### Dependencies
-No dependacies! Written in plain javascript.
+No dependencies! Written in plain javascript.
 
 ### Example
 
@@ -88,8 +93,8 @@ In this case options `count` and `perRow` are ignored.
 
 Single frame rotation:
 ```js
-threesixty.next(); 
-threesixty.prev(); 
+threesixty.next();
+threesixty.prev();
 ```
 
 Focus *n-th* frame:
@@ -123,6 +128,10 @@ Clean up registered events:
 ```js
 threesixty.destroy();
 ```
+
+### Contributions
+
+All contributions are welcome. To get started, clone repo and `npm start`
 
 ### Licence
 
