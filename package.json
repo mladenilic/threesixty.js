@@ -16,16 +16,16 @@
     "dist/*"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.17.x",
-    "@babel/core": "7.17.x",
-    "@babel/plugin-proposal-class-properties": "^7.16.x",
-    "@babel/preset-env": "7.16.x",
-    "babel-loader": "8.2.x",
-    "chai": "^4.3.6",
-    "jsdom": "^19.0.0",
-    "mocha": "^9.2.2",
-    "webpack": "5.72.x",
-    "webpack-cli": "4.9.x"
+    "@babel/cli": "^7.19.x",
+    "@babel/core": "7.20.x",
+    "@babel/plugin-proposal-class-properties": "^7.18.x",
+    "@babel/preset-env": "7.20.x",
+    "babel-loader": "9.1.x",
+    "chai": "^4.3.7",
+    "jsdom": "^20.0.3",
+    "mocha": "^10.1.0",
+    "webpack": "5.75.x",
+    "webpack-cli": "5.0.x"
   },
   "keywords": [
     "360",
