@@ -3,11 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 
-jobs:
+workflows:
   test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/install-packages
+    jobs:
       - node/test
