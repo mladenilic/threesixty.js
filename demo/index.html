@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    .wrapper {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      text-align: center;
+      color: #444;
+    }
+
+    #threesixty {
+      margin: 0 auto;
+      user-select: none;
+    }
+
+    .buttons-wrapper {
+      max-width: 200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .button {
+      position: relative;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: none;
+      padding: 40px 7px 5px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 0;
+    }
+
+    .button::before, .button::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      border-left: 2px solid #000;
+      border-top: 2px solid #000;
+      width: 15px;
+      height: 15px;
+      transform: translate(-45%) rotate(-45deg);
+    }
+
+    .button::after {
+      transform: translate(5%) rotate(-45deg);
+    }
+
+    #next::before {
+      transform: translate(-90%) rotate(135deg);
+    }
+
+    #next::after {
+      transform: translate(-50%) rotate(135deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>ThreeSixty.js</h1>
+    <p>Drag, use keyboard arrows (&larr; & &rarr;) or click to rotate image.</p>
+    <div id="threesixty"></div>
+    <div class="buttons-wrapper">
+      <button class="button" id="prev">Prev</button>
+      spin
+      <button class="button" id="next">Next</button>
+    </div>
+
+    <script src="threesixty.js"></script>
+    <script>
+      const threesixty = new ThreeSixty(document.getElementById('threesixty'), {
+        image: 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg',
+        width: 320,
+        height: 320,
+        count: 31,
+        perRow: 4,
+        speed: 100,
+        prev: document.getElementById('prev'),
+        next: document.getElementById('next')
+      });
+
+      threesixty.play();
+    </script>
+  </div>
+</body>
+</html>
