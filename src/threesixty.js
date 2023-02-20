@@ -1,5 +1,20 @@
 import Events from './threesixty/events';
 
+function observeCallback(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      var ts = entry.target.threesixty;
+      observer.unobserve(entry.target);
+      if (ts) {
+        ts._initContainer();
+        if (ts.deferPlay) {
+          ts.play(ts.deferPlay.reversed, ts.deferPlay.maxloops)
+        };
+      }
+    }
+  });
+}
+
 class ThreeSixty {
   #options = null;
   #index = 0;
@@ -10,6 +25,8 @@ class ThreeSixty {
 
   #events = null;
   #sprite = false;
+
+  #observer = null;
 
   constructor(container, options) {
     this.container = container;
@@ -26,7 +43,8 @@ class ThreeSixty {
       draggable: true,
       swipeable: true,
       keys: true,
-      inverted: false
+      inverted: false,
+      lazy: false
     }, options);
 
     this.#options.swipeTarget = this.#options.swipeTarget || this.container;
@@ -42,7 +60,14 @@ class ThreeSixty {
 
     this._windowResizeListener = this._windowResizeListener.bind(this);
 
-    this._initContainer();
+    this.deferPlay = null;
+    if (this.#options.lazy) {
+      this.container.threesixty = this;
+      this.#observer = new IntersectionObserver(observeCallback);
+      this.#observer.observe(this.container);
+    } else {
+      this._initContainer();
+    }
 
     this.nloops = 0;
   }
@@ -91,6 +116,11 @@ class ThreeSixty {
     if (this.looping) {
       return;
     }
+    if (this.#observer) {
+      this.deferPlay = {"reversed": reversed, "maxloops": maxloops};
+      return
+    }
+    this.deferPlay = null;
 
     this._loop(reversed);
     this.#looping = true;
@@ -125,6 +155,9 @@ class ThreeSixty {
     this.container.style.backgroundPositionY = '';
     this.container.style.backgroundSize = '';
 
+    if (this.#observer) {
+      this.#observer.disconnect();
+    }
     if (this.isResponsive) {
       window.removeEventListener('resize', this._windowResizeListener);
     }
@@ -150,7 +183,7 @@ class ThreeSixty {
     if (this.sprite) {
       this.container.style.backgroundPositionX = -(this.#index % this.#options.perRow) * this.containerWidth + 'px';
       this.container.style.backgroundPositionY = -Math.floor(this.#index / this.#options.perRow) * this.containerHeight + 'px';
-    } else {
+    } else if (!this.#observer) {
       this.container.style.backgroundImage = `url("${this.#options.image[this.#index]}")`;
     }
   }
@@ -161,6 +194,10 @@ class ThreeSixty {
   }
 
   _initContainer() {
+    if (this.#observer) {
+      this.#observer.disconnect();
+      this.#observer = null;
+    }
     if (!this.isResponsive) {
       this.container.style.width = this.containerWidth + 'px';
     }
