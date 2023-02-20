@@ -68,8 +68,11 @@ threesixty.play();
   swipeTarget: document.getElementById('wrapper'), // Element which will listen for drag/swipe events. Default: Image container
 
   // Rotation settings
-  speed: 100,     // Rotation speed during 'play' mode. Default: 10
-  inverted: false // Inverts rotation direction
+  speed: 100,      // Rotation speed during 'play' mode. Default: 10
+  inverted: false, // Inverts rotation direction
+
+  // Lazy loading
+  lazy: false      // Initialize and load images only when container is visible. Default: false
 }
 ```
 
