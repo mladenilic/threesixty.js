@@ -26,7 +26,7 @@
     "chai": "^4.3.7",
     "jsdom": "^20.0.3",
     "mocha": "^10.1.0",
-    "webpack": "5.75.x",
+    "webpack": "5.76.x",
     "webpack-cli": "5.0.x",
     "webpack-dev-server": "^4.11.1"
   },
