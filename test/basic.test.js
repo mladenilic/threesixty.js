@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import ThreeSixty from '../dist/threesixty';
+import ThreeSixty from '../src/threesixty.js';
 
-describe('Basic Features', () => {
-  before(() => {
+describe('Basic Features', function () {
+  before(function () {
     this.container = document.getElementById('threesixty');
     this.image = 'https://s3.eu-central-1.amazonaws.com/threesixty.js/watch.jpg';
     this.threesixty = new ThreeSixty(document.getElementById('threesixty'), {
@@ -14,18 +14,18 @@ describe('Basic Features', () => {
     });
   });
 
-  it('should set container properties', () => {
+  it('should set container properties', function () {
     expect(this.container.style.backgroundImage).to.be.equal(`url(${this.image})`);
     expect(this.container.style.backgroundSize).to.be.equal('400% 800%');
     expect(this.container.style.backgroundPositionX).to.be.equal('0px');
     expect(this.container.style.backgroundPositionY).to.be.equal('0px');
   });
 
-  it('should be in sprite mode when single image is provided', () => {
+  it('should be in sprite mode when single image is provided', function () {
      expect(this.threesixty.sprite).to.be.equal(true);
   });
 
-  it('should update current index when navigation is used', () => {
+  it('should update current index when navigation is used', function () {
     expect(this.threesixty.index).to.be.equal(0);
 
     this.threesixty.next();
@@ -40,7 +40,7 @@ describe('Basic Features', () => {
     expect(this.threesixty.index).to.be.equal(1);
   });
 
-  it('should correctly update current index when goto is used', () => {
+  it('should correctly update current index when goto is used', function () {
     this.threesixty.goto(0);
 
     expect(this.threesixty.index).to.be.equal(0);
@@ -58,7 +58,7 @@ describe('Basic Features', () => {
     expect(this.threesixty.index).to.be.equal(3);
   });
 
-  it('should update looping status when played/stopped', () => {
+  it('should update looping status when played/stopped', function () {
     expect(this.threesixty.looping).to.be.equal(false);
 
     this.threesixty.play();
@@ -70,7 +70,7 @@ describe('Basic Features', () => {
     expect(this.threesixty.looping).to.be.equal(false);
   });
 
-  it('should update looping status when toggled', () => {
+  it('should update looping status when toggled', function () {
     expect(this.threesixty.looping).to.be.equal(false);
 
     this.threesixty.toggle();
@@ -82,8 +82,7 @@ describe('Basic Features', () => {
     expect(this.threesixty.looping).to.be.equal(false);
   });
 
-
-  it('should clean up container properties after destroy', () => {
+  it('should clean up container properties after destroy', function () {
     this.threesixty.destroy();
 
     expect(this.container.style.backgroundImage).to.be.equal('');
