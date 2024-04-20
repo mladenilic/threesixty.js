@@ -1,5 +1,5 @@
-const expect = require('chai').expect;
-const ThreeSixty = require('../dist/threesixty');
+import { expect } from 'chai';
+import ThreeSixty from '../dist/threesixty';
 
 describe('Basic Features', () => {
   before(() => {
