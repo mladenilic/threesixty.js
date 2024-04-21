@@ -1,4 +1,4 @@
-const { JSDOM } = require('jsdom');
+import { JSDOM } from 'jsdom';
 
 const jsdom = new JSDOM('<!doctype html><html><body><div id="threesixty"></div></body></html>');
 

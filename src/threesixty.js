@@ -1,4 +1,4 @@
-import Events from './threesixty/events';
+import Events from './threesixty/events.js';
 
 class ThreeSixty {
   #options = null;
@@ -103,7 +103,7 @@ class ThreeSixty {
       return;
     }
 
-    global.clearTimeout(this.#loopTimeoutId);
+    window.clearTimeout(this.#loopTimeoutId);
     this.#looping = false;
     this.#maxloops = null;
     this.nloops = 0;
@@ -141,7 +141,7 @@ class ThreeSixty {
       }
     }
 
-    this.#loopTimeoutId = global.setTimeout(() => {
+    this.#loopTimeoutId = window.setTimeout(() => {
       this._loop(reversed);
     }, this.#options.speed);
   }
